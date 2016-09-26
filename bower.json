@@ -1,0 +1,37 @@
+{
+  "name": "loopback-angular-ui-router",
+  "version": "1.0.0",
+  "description": "",
+  "contributors": [
+    { 
+      "name": "Jeff Rose", 
+      "email": "jrose0@gmail.com" 
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DigitalMachinist/loopback-angular-ui-router.git"
+  },
+  "main": "scripts/app.js",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "angular"          : "~1.4.0",
+    "angular-resource" : "~1.4.0",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap"        : "~3.3.4",
+    "es5-shim"         : "~4.1.4",
+    "json3"            : "~3.3.2"
+  },
+  "devDependencies": {
+    "angular-mocks"    : "~1.4.0"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ]
+}
