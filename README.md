@@ -39,7 +39,7 @@ npm install & bower install
 ```
 然后运行它：
 ```
-grunt serve
+grunt server
 ```
 如果需要发布版本：
 
