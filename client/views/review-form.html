@@ -1,14 +1,11 @@
-<section>
+<div class="addReview-container need-margin">
   <form name="form" ng-submit="submitForm()">
     <fieldset>
       <legend>{{action}} review form</legend>
 
       <div class="form-group">
         <label>Coffee shop name</label>
-        <select
-            ng-disabled="isDisabled"
-            ng-model="selectedShop"
-            ng-options="shop as shop.name for shop in coffeeShops"></select>
+        <select ng-disabled="isDisabled" ng-model="selectedShop" ng-options="shop as shop.name for shop in coffeeShops"></select>
       </div>
 
       <div class="form-group">
@@ -31,4 +28,5 @@
       </div>
     </fieldset>
   </form>
-<section>
+
+</div>

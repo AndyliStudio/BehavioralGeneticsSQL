@@ -1,47 +1,133 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
-  <head>
-    <meta charset="utf-8">
-    <title>loopback-getting-started-intermediate</title>
-    <link href="css/style.css" rel="stylesheet">
-  </head>
-  <body>
-    <header>
-      <h1>Coffee shop reviews</h1>
-      <h2 ng-show="currentUser">Hello {{currentUser.email}}</h2>
-      <nav>
-        <ul>
-          <li>
-            <a ui-sref="all-reviews" ui-sref-active="active">All reviews</a>
-          </li>
-          <li ng-hide="currentUser">
-            <a ui-sref="sign-up" ui-sref-active="active">Sign up</a>
-          </li>
-          <li ng-show="currentUser">
-            <a ui-sref="my-reviews" ui-sref-active="active">My Reviews</a>
-          </li>
-          <li ng-show="currentUser">
-            <a ui-sref="add-review" ui-sref-active="active">Add Review</a>
-          </li>
-          <li ng-hide="currentUser">
-            <a ui-sref="login" ui-sref-active="active">Log in</a>
-          </li>
-          <li ng-show="currentUser">
-            <a ui-sref="logout" ui-sref-active="active">Log out</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
 
-    <main ui-view></main>
+<head>
+  <meta charset="utf-8">
+  <title>人类行为遗传基因数据库</title>
+  <!-- build:css({.tmp,app}) styles/main.css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/font-awesome.min.css">
+  <link rel="stylesheet" href="styles/linearicons.css">
+  <link rel="stylesheet" href="styles/owl.carousel.css">
+  <link rel="stylesheet" href="styles/owl.theme.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/search.css">
+  <link rel="stylesheet" href="styles/phenotype.css">
+  <!-- endbuild -->
+</head>
 
-    <script src="vendor/angular.js"></script>
-    <script src="vendor/angular-resource.js"></script>
-    <script src="vendor/angular-ui-router.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/services/lb-services.js"></script>
-    <script src="js/controllers/auth.js"></script>
-    <script src="js/controllers/review.js"></script>
-    <script src="js/services/auth.js"></script>
-  </body>
+<body>
+  <!--======== header =========-->
+  <header id="home" data-spy="scroll" data-target="#top-nav">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <!-- menu 4 -->
+        <div class="navbar navbar-default navbar-fixed-top default-menu menu-4" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-4" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+              <a class="navbar-brand default-logo scroll" href="#home"><i class="fa fa-compass"></i>EODream</a>
+            </div>
+
+            <div class="collapse navbar-collapse top-nav" id="menu-4">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a class="scroll" ui-sref="main">服务</a></li>
+                <li><a class="scroll" href="#help">使用帮助</a></li>
+                <li><a class="scroll" href="#team">团队</a></li>
+                <li><a class="scroll" href="#blog">官方博客</a></li>
+                <li><a class="scroll" href="#contact">联系我们</a></li>
+                <li>
+                  <button type="button" class="btn btn-default navbar-btn" ui-sref="login" ng-hide="currentUser">登陆</button>
+                  <a href="" ng-show="currentUser">{{currentUser.email}}</a>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+        <!-- end menu -->
+      </div>
+    </div>
+  </header>
+  <!--======== end header =========-->
+  <header>
+    <h1>Coffee shop reviews</h1>
+    <h2 ng-show="currentUser">Hello {{currentUser.email}}</h2>
+    <nav>
+      <ul>
+        <li>
+          <a ui-sref="all-reviews" ui-sref-active="active">All reviews</a>
+        </li>
+        <li ng-hide="currentUser">
+          <a ui-sref="sign-up" ui-sref-active="active">Sign up</a>
+        </li>
+        <li ng-show="currentUser">
+          <a ui-sref="my-reviews" ui-sref-active="active">My Reviews</a>
+        </li>
+        <li ng-show="currentUser">
+          <a ui-sref="add-review" ui-sref-active="active">Add Review</a>
+        </li>
+        <li ng-hide="currentUser">
+          <a ui-sref="login" ui-sref-active="active">Log in</a>
+        </li>
+        <li ng-show="currentUser">
+          <a ui-sref="logout" ui-sref-active="active">Log out</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main ui-view></main>
+
+  <!--======== footer =========-->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-md-12 text-center">
+          <p>More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a> | Copyright 2016 | All Rights Reserved.
+            <span><a href="#home" class="scroll"><i class="lnr lnr lnr-chevron-up"></i></a></span></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!--滑动效果-->
+  <script type="text/javascript" defer="defer">
+    $(document).ready(function() {
+      ///smooth scroll
+      $(function() {
+        $('.scroll').click(function() {
+          if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+              $('html, body').animate({
+                scrollTop: target.offset().top - 69
+              }, 800);
+              return false;
+            }
+          }
+        });
+      });
+    });
+  </script>
+  <!--======== end footer =========-->
+
+  <script src="vendor/angular.js"></script>
+  <script src="vendor/angular-resource.js"></script>
+  <script src="vendor/angular-ui-router.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services/lb-services.js"></script>
+  <script src="js/controllers/auth.js"></script>
+  <script src="js/controllers/review.js"></script>
+  <script src="js/services/auth.js"></script>
+</body>
+
 </html>

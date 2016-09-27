@@ -60,8 +60,32 @@ angular
       .state('sign-up-success', {
         url: '/sign-up/success',
         templateUrl: 'views/sign-up-success.html'
+      })
+      .state('main', {
+        url: '/main',
+        templateUrl: 'views/main.html'
+      })
+      .state('phenotype', {
+        url: '/phenotype',
+        templateUrl: 'views/phenotype.html'
+      })
+      .state('gene_region', {
+        url: '/gene_region',
+        templateUrl: 'views/gene_region.html'
+      })
+      .state('marker', {
+        url: '/marker',
+        templateUrl: 'views/marker.html'
+      })
+      .state('pathway', {
+        url: '/pathway',
+        templateUrl: 'views/pathway.html'
+      })
+      .state('browser', {
+        url: '/browser',
+        templateUrl: 'views/browser.html'
       });
-    $urlRouterProvider.otherwise('all-reviews');
+    $urlRouterProvider.otherwise('main');
   }])
   .run(['$rootScope', '$state', function($rootScope, $state) {
     $rootScope.$on('$stateChangeStart', function(event, next) {

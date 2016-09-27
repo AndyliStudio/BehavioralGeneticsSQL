@@ -1,0 +1,94 @@
+#container{
+    position: relative;
+    height: 100%;
+}
+#searchDiv{
+    position: absolute;
+    width: auto;
+    height: 40px;
+    top:20%;
+    left: 50%;
+    transform: translate(-50%);
+}
+#searchDiv input{
+    height: 40px;
+    background-color: white;
+    padding: 0px 20px;
+    border: 0px;
+    margin-bottom: 0px;
+}
+
+#searchDiv button{
+    padding: 0px;
+    border: 0px;
+    height: 40px;
+    width: 100px;
+    background-color: #dBdAd9;
+}
+#searchHistory{
+    position: absolute;
+    width: 900px;
+    height: 120px;
+    left: 50%;
+    top:35%;
+    margin-left: -450px;
+    margin-top: -60px;
+}
+#searchHistory a{
+    text-decoration: solid;
+    margin-right: 20px;
+}
+#searchHistory h3{
+
+}
+#searchHistory div{
+    background-color: #dBdAd9;
+    height: 100px;
+    padding: 20px;
+}
+
+#friendLink{
+    position: absolute;
+    width: 900px;
+    height: 120px;
+    left: 50%;
+    top:62%;
+    margin-left: -450px;
+    margin-top: -60px;
+}
+#friendLinkChild{
+    background-color: #dBdAd9;
+}
+#friendLinkChild div{
+    float: left;
+    margin-right: 20px;
+    width: 100px;
+    height:100px;
+    background-color: #3f86b7;
+}
+
+/*写部分关于表格的css*/
+table.hovertable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #999999;
+    border-collapse: collapse;
+}
+table.hovertable th {
+    background-color:#c3dde0;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}
+table.hovertable tr {
+    background-color:#d4e3e5;
+}
+table.hovertable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}

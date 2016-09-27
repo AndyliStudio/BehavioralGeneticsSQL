@@ -1,4 +1,4 @@
-<section>
+<div class="myReviews-container need-margin">
   <article ng-repeat="r in reviews.slice().reverse()">
     <header>
       <h1>{{r.date | date}} | {{r.coffeeShop.name}}</h1>
@@ -12,4 +12,4 @@
       <button a ui-sref="delete-review({ id: r.id })">Delete</button>
     </div>
   </article>
-</section>
+</div>
