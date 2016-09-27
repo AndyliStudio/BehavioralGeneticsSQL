@@ -1,14 +1,35 @@
-#loopback-getting-started-intermediate
+git # BehavioralGeneticsSQL
+人类行为遗传数据库，创建于2015-09-26
 
-Please see LoopBack [Getting started part II](http://docs.strongloop.com/display/LB/Getting+started+part+II) for the tutorial that walks you through creating this application.
+# 使用技术
++ AngularJS
++ BootStrap
++ JQuery
 
+# 后台和数据库
++ loopBack
++ mySQL
+
+# 主要功能
++ Phenotype
++ Gene/Region
++ Marker
++ Pathway
++ Browser
+
+# 安装运行
+
+安装依赖：
 ```
-$ git clone https://github.com/strongloop/loopback-getting-started-intermediate.git
-$ cd loopback-getting-started-intermediate
-$ npm install
-$ node .
+cd <your project folder>
+npm install
 ```
-
----
-
-[More LoopBack examples](https://github.com/strongloop/loopback-example)
+然后运行它：
+```
+slc run
+```
+如果需要使用loopback构建的`/explorer`和`/api`，你可以使用
+```
+node .
+```
+然后在浏览器打开 [http://localhost:9000/](http://localhost:9000/)
