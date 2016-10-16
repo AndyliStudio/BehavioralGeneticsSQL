@@ -37,5 +37,9 @@
   "Reviewer": {
     "dataSource": "mongoDs",
     "public": true
+  },
+  "gene_info": {
+    "dataSource": "mysqlDs",
+    "public": true
   }
 }

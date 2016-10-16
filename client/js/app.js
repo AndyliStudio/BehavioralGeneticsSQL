@@ -8,8 +8,30 @@ angular
     'ui.router',
     'lbServices'
   ])
-  .config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
-      $urlRouterProvider) {
+  .filter('searchFor', function () {
+
+    // All filters must return a function. The first parameter
+    // is the data that is to be filtered, and the second is an
+    // argument that may be passed with a colon (searchFor:searchString)
+
+    return function (arr, searchString) {
+
+      if (!searchString) {
+        return arr;
+      }
+      var result = [];
+      searchString = searchString.toLowerCase();
+      // Using the forEach helper method to loop through the array
+      angular.forEach(arr, function (item) {
+        if (item.title.toLowerCase().indexOf(searchString) !== -1) {
+          result.push(item);
+        }
+      });
+      return result;
+    };
+  })
+  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider,
+    $urlRouterProvider) {
     $stateProvider
       .state('add-review', {
         url: '/add-review',
@@ -71,7 +93,8 @@ angular
       })
       .state('gene_region', {
         url: '/gene_region',
-        templateUrl: 'views/gene_region.html'
+        templateUrl: 'views/gene_region.html',
+        controller: 'Gene_regionController'
       })
       .state('marker', {
         url: '/marker',
@@ -87,8 +110,8 @@ angular
       });
     $urlRouterProvider.otherwise('main');
   }])
-  .run(['$rootScope', '$state', function($rootScope, $state) {
-    $rootScope.$on('$stateChangeStart', function(event, next) {
+  .run(['$rootScope', '$state', function ($rootScope, $state) {
+    $rootScope.$on('$stateChangeStart', function (event, next) {
       // redirect to login page if not logged in
       if (next.authenticate && !$rootScope.currentUser) {
         event.preventDefault(); //prevent current page from loading

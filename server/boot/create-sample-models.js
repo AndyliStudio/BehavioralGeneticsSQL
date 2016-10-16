@@ -13,7 +13,8 @@ module.exports = function(app) {
   // create all models
   async.parallel({
     reviewers: async.apply(createReviewers),
-    coffeeShops: async.apply(createCoffeeShops)
+    coffeeShops: async.apply(createCoffeeShops),
+    gene_info: async.apply(createGeneInfo)
   }, function(err, results) {
     if (err) throw err;
 
@@ -85,6 +86,16 @@ module.exports = function(app) {
           publisherId: reviewers[2].id,
           coffeeShopId: coffeeShops[2].id
         }
+      ], cb);
+    });
+  }
+  // create geneInfo
+  function createGeneInfo(cb) {
+    mysqlDs.automigrate('gene_info', function(err) {
+      if (err) return cb(err);
+
+      app.models.gene_info.create([
+        {gene_name: 'test_gene_name', chromosomes_name: 'test_chromosomes_name', start_location: 'test_start_location', end_location: 'test_end_location'}
       ], cb);
     });
   }

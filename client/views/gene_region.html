@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="gene_region-container need-margin">
+    <div id="searchDiv">
+        <input type="search" placeholder="输入你想要查询的基因或物种" name="search" size=50 ng-model="searchString"/><button>Search</button>
+        <li ng-repeat="i in items | searchFor:searchString">
+				<a href="{{i.url}}"><img ng-src="{{i.image}}" /></a>
+				<p>{{i.title}}</p>
+			</li>
+		</ul>
+    </div>
+    <!--<div id="searchHistory">
+        <h3>搜索历史</h3>
+        <div><a href="#">ENSG00000139618</a><a href="#">YBL058W</a></div>
+    </div>
+    <div id="friendLink">
+        <h3>友情链接</h3>
+        <div id="friendLinkChild">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
 
-</body>
-</html>
+    </div>-->
+</div>

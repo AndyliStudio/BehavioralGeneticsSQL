@@ -1,0 +1,30 @@
+{
+  "name": "gene_info",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "gene_name": {
+      "type": "string",
+      "required": true,
+      "default": "undefined"
+    },
+    "chromosomes_name": {
+      "type": "string",
+      "required": true,
+      "default": "undefined"
+    },
+    "start_location": {
+      "type": "string"
+    },
+    "end_location": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
