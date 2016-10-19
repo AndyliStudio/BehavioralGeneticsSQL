@@ -14,7 +14,7 @@ module.exports = function(app) {
   async.parallel({
     reviewers: async.apply(createReviewers),
     coffeeShops: async.apply(createCoffeeShops),
-    gene_info: async.apply(createGeneInfo)
+    // gene_info: async.apply(createGeneInfo)
   }, function(err, results) {
     if (err) throw err;
 

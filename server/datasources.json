@@ -4,12 +4,13 @@
     "connector": "memory"
   },
   "mysqlDs": {
-    "host": "localhost",
+    "host": "qdm1300839.my3w.com",
     "port": 3306,
-    "database": "behavioral_genetics",
-    "username": "root",
-    "password": "123456",
+    "database": "qdm1300839_db",
+    "username": "qdm1300839",
+    "password": "121960425sql",
     "name": "mysqlDs",
+    "insecureAuth": true,
     "connector": "mysql"
   },
   "mongoDs": {
