@@ -41,5 +41,13 @@
   "gene_info": {
     "dataSource": "mysqlDs",
     "public": true
+  },
+  "pathway": {
+    "dataSource": "mysqlDs",
+    "public": true
+  },
+  "snp_info": {
+    "dataSource": "mysqlDs",
+    "public": true
   }
 }

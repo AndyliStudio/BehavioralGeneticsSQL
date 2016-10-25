@@ -1,0 +1,69 @@
+{
+  "name": "snp_info",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "trait": {
+      "type": "string"
+    },
+    "marker": {
+      "type": "string",
+      "default": "chr"
+    },
+    "chr": {
+      "type": "number"
+    },
+    "pos": {
+      "type": "number"
+    },
+    "df": {
+      "type": "number"
+    },
+    "F": {
+      "type": "number"
+    },
+    "p": {
+      "type": "number"
+    },
+    "add_effect": {
+      "type": "number"
+    },
+    "add_f": {
+      "type": "number"
+    },
+    "add_p": {
+      "type": "number"
+    },
+    "dom_effect": {
+      "type": "number"
+    },
+    "dom_f": {
+      "type": "number"
+    },
+    "dom_p": {
+      "type": "number"
+    },
+    "errordf": {
+      "type": "number"
+    },
+    "markerR2": {
+      "type": "number"
+    },
+    "genetic_var": {
+      "type": "number"
+    },
+    "residual_var": {
+      "type": "number"
+    },
+    "LnLikelihood": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

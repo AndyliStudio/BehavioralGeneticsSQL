@@ -12,9 +12,11 @@ module.exports = function(app) {
 
   // create all models
   async.parallel({
-    reviewers: async.apply(createReviewers),
-    coffeeShops: async.apply(createCoffeeShops),
-    // gene_info: async.apply(createGeneInfo)
+    // reviewers: async.apply(createReviewers),
+    // coffeeShops: async.apply(createCoffeeShops),
+    // gene_info: async.apply(createGeneInfo),
+    // pathway: async.apply(createPathway),
+    // snp_info: async.apply(createSNPInfo)
   }, function(err, results) {
     if (err) throw err;
 
@@ -96,6 +98,45 @@ module.exports = function(app) {
 
       app.models.gene_info.create([
         {gene_name: 'test_gene_name', chromosomes_name: 'test_chromosomes_name', start_location: 'test_start_location', end_location: 'test_end_location'}
+      ], cb);
+    });
+  }
+  // create pathway
+  function createPathway(cb) {
+    mysqlDs.automigrate('pathway', function(err) {
+      if (err) return cb(err);
+
+      app.models.pathway.create([
+        {pathway_name: 'test_gene_name', des: 'test_chromosomes_name', contain_genes: ['1', '2']}
+      ], cb);
+    });
+  }
+  // create snp_info
+  function createSNPInfo(cb) {
+    mysqlDs.automigrate('snp_info', function(err) {
+      if (err) return cb(err);
+
+      app.models.snp_info.create([
+        {
+          trait: 'Fat',
+          marker: 'Chr01_15267',
+          chr: 1,
+          pos: 15267,
+          df: 2,
+          F: 0.330543274766459,
+          p: 0.719681255813397,
+          add_effect: 0.00516491097065063,
+          add_f: 0.58477553000948,
+          add_p: 0.447092257726097,
+          dom_effect: -0.00590128913638032,
+          dom_f: 0.483413612297874,
+          dom_p: 0.489249366719721,
+          errordf: 71,
+          markerR2: 0.0094440935647556,
+          genetic_var: 0.000518338853210959,
+          residual_var: 0.0000539583788187144,
+          LnLikelihood: -331.377780834755
+        }
       ], cb);
     });
   }
