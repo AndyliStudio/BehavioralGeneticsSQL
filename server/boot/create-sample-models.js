@@ -12,8 +12,8 @@ module.exports = function(app) {
 
   // create all models
   async.parallel({
-    // reviewers: async.apply(createReviewers),
-    // coffeeShops: async.apply(createCoffeeShops),
+    reviewers: async.apply(createReviewers),
+    coffeeShops: async.apply(createCoffeeShops),
     // gene_info: async.apply(createGeneInfo),
     // pathway: async.apply(createPathway),
     // snp_info: async.apply(createSNPInfo)

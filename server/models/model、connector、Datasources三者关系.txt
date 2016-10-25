@@ -1,0 +1,62 @@
+"mongoDs": {
+	"host": "demo.strongloop.com",
+	"port": 27017,
+	"database": "getting_started_intermediate",
+	"username": "demo",
+	"password": "L00pBack",
+	"name": "mongoDs",
+	"connector": "mongodb"
+}
+
+
+model、connector、Datasources三者关系
+
+Creating a DataSource
+
+```
+var DataSource = require('loopback-datasource-juggler').DataSource;
+var dataSource = new DataSource({
+    connector: require('loopback-connector-mongodb'),
+    host: 'localhost',
+    port: 27017,
+    database: 'mydb'
+});
+```
+
+Creating a Model
+
+```
+var DataSource = require('loopback-datasource-juggler').DataSource;
+var ds = new DataSource('memory');
+
+var User = ds.define('User', {
+    name: String,
+    bio: String,
+    approved: Boolean,
+    joinedAt: Date,
+    age: Number
+});
+```
+
+Discovering model definitions from the data source
+
+```
+// List database tables and/or views
+ds.discoverModelDefinitions({views: true, limit: 20}, cb);
+
+// List database columns for a given table/view
+ds.discoverModelProperties('PRODUCT', cb);
+ds.discoverModelProperties('INVENTORY_VIEW', {owner: 'STRONGLOOP'}, cb);
+
+// List primary keys for a given table
+ds.discoverPrimaryKeys('INVENTORY',  cb);
+
+// List foreign keys for a given table
+ds.discoverForeignKeys('INVENTORY',  cb);
+
+// List foreign keys that reference the primary key of the given table
+ds.discoverExportedForeignKeys('PRODUCT',  cb);
+
+// Create a model definition by discovering the given table
+ds.discoverSchema(table, {owner: 'STRONGLOOP'}, cb);
+```
