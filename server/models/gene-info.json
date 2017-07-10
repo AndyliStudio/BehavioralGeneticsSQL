@@ -1,0 +1,44 @@
+{
+  "name": "gene_info",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "replicon_name": {
+      "type": "string"
+    },
+    "replicon_accession": {
+      "type": "string"
+    },
+    "start": {
+      "type": "number"
+    },
+    "stop": {
+      "type": "number"
+    },
+    "strand": {
+      "type": "string"
+    },
+    "gene_id": {
+      "type": "number"
+    },
+    "locus": {
+      "type": "string"
+    },
+    "protein_name": {
+      "type": "string"
+    },
+    "protein_product": {
+      "type": "string"
+    },
+    "length": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

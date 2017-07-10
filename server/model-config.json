@@ -1,0 +1,50 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ]
+  },
+  "AccessToken": {
+    "dataSource": "mysqlDs",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mysqlDs",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mysqlDs",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "mysqlDs",
+    "public": false
+  },
+  "CoffeeShop": {
+    "dataSource": "mysqlDs",
+    "public": true
+  },
+  "Review": {
+    "dataSource": "mysqlDs",
+    "public": true
+  },
+  "Reviewer": {
+    "dataSource": "mysqlDs",
+    "public": true
+  },
+  "gene_info": {
+    "dataSource": "mysqlDs",
+    "public": true
+  },
+  "pathway": {
+    "dataSource": "mysqlDs",
+    "public": true
+  },
+  "snp_info": {
+    "dataSource": "mysqlDs",
+    "public": true
+  }
+}
