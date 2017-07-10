@@ -10,8 +10,7 @@
       "type": "string"
     },
     "marker": {
-      "type": "string",
-      "default": "chr"
+      "type": "string"
     },
     "chr": {
       "type": "number"
@@ -23,43 +22,43 @@
       "type": "number"
     },
     "F": {
-      "type": "number"
+      "type": "string"
     },
     "p": {
-      "type": "number"
+      "type": "string"
     },
     "add_effect": {
-      "type": "number"
+      "type": "string"
     },
     "add_f": {
-      "type": "number"
+      "type": "string"
     },
     "add_p": {
-      "type": "number"
+      "type": "string"
     },
     "dom_effect": {
-      "type": "number"
+      "type": "string"
     },
     "dom_f": {
-      "type": "number"
+      "type": "string"
     },
     "dom_p": {
-      "type": "number"
+      "type": "string"
     },
     "errordf": {
-      "type": "number"
+      "type": "string"
     },
     "markerR2": {
-      "type": "number"
+      "type": "string"
     },
     "genetic_var": {
-      "type": "number"
+      "type": "string"
     },
     "residual_var": {
-      "type": "number"
+      "type": "string"
     },
     "LnLikelihood": {
-      "type": "number"
+      "type": "string"
     }
   },
   "validations": [],

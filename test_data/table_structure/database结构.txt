@@ -1,0 +1,148 @@
+/*------- pathway表---------*/
+
+
+/*------- INSERT SQL---------*/
+insert into `pathway` (`id`,`pathway_name`,`des`,`contain_genes`)
+ values(<id>,<pathway_name>,<des>,<contain_genes>);
+
+/*------- UPDATE SQL---------*/
+update `pathway SET 
+    `id`=<value>,
+    `pathway_name`=<value>,
+    `des`=<value>,
+    `contain_genes`=<value>
+  where xxx = xxx;
+
+/*------- SELECT SQL---------*/
+select 
+    `id`,
+    `pathway_name`,
+    `des`,
+    `contain_genes`
+  from `pathway`
+  where xxx = xxx;
+
+/*------- CREATE SQL---------*/
+CREATE TABLE `pathway` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pathway_name` varchar(512) DEFAULT NULL,
+  `des` varchar(512) DEFAULT NULL,
+  `contain_genes` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=gbk
+
+
+
+
+/*------- gene_info表---------*/
+
+
+/*------- INSERT SQL---------*/
+insert into `gene_info` (`id`,`gene_name`,`chromosomes_name`,`start_location`,`end_location`)
+ values(<id>,<gene_name>,<chromosomes_name>,<start_location>,<end_location>);
+
+/*------- UPDATE SQL---------*/
+update `gene_info SET 
+    `id`=<value>,
+    `gene_name`=<value>,
+    `chromosomes_name`=<value>,
+    `start_location`=<value>,
+    `end_location`=<value>
+  where xxx = xxx;
+
+/*------- SELECT SQL---------*/
+select 
+    `id`,
+    `gene_name`,
+    `chromosomes_name`,
+    `start_location`,
+    `end_location`
+  from `gene_info`
+  where xxx = xxx;
+
+/*------- CREATE SQL---------*/
+CREATE TABLE `gene_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `gene_name` varchar(512) NOT NULL,
+  `chromosomes_name` varchar(512) NOT NULL,
+  `start_location` varchar(512) DEFAULT NULL,
+  `end_location` varchar(512) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1002 DEFAULT CHARSET=gbk
+
+/*------- INSERT SQL---------*/
+insert into `snp_info` (`id`,`trait`,`marker`,`chr`,`pos`,`df`,`F`,`p`,`add_effect`,`add_f`,`add_p`,`dom_effect`,`dom_f`,`dom_p`,`errordf`,`markerR2`,`genetic_var`,`residual_var`,`LnLikelihood`)
+ values(<id>,<trait>,<marker>,<chr>,<pos>,<df>,<F>,<p>,<add_effect>,<add_f>,<add_p>,<dom_effect>,<dom_f>,<dom_p>,<errordf>,<markerR2>,<genetic_var>,<residual_var>,<LnLikelihood>);
+
+/*------- UPDATE SQL---------*/
+update `snp_info SET 
+    `id`=<value>,
+    `trait`=<value>,
+    `marker`=<value>,
+    `chr`=<value>,
+    `pos`=<value>,
+    `df`=<value>,
+    `F`=<value>,
+    `p`=<value>,
+    `add_effect`=<value>,
+    `add_f`=<value>,
+    `add_p`=<value>,
+    `dom_effect`=<value>,
+    `dom_f`=<value>,
+    `dom_p`=<value>,
+    `errordf`=<value>,
+    `markerR2`=<value>,
+    `genetic_var`=<value>,
+    `residual_var`=<value>,
+    `LnLikelihood`=<value>
+  where xxx = xxx;
+
+/*------- snp_info 表---------*/
+
+/*------- SELECT SQL---------*/
+select 
+    `id`,
+    `trait`,
+    `marker`,
+    `chr`,
+    `pos`,
+    `df`,
+    `F`,
+    `p`,
+    `add_effect`,
+    `add_f`,
+    `add_p`,
+    `dom_effect`,
+    `dom_f`,
+    `dom_p`,
+    `errordf`,
+    `markerR2`,
+    `genetic_var`,
+    `residual_var`,
+    `LnLikelihood`
+  from `snp_info`
+  where xxx = xxx;
+
+/*------- CREATE SQL---------*/
+CREATE TABLE `snp_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `trait` varchar(512) DEFAULT NULL,
+  `marker` varchar(512) DEFAULT NULL,
+  `chr` int(11) DEFAULT NULL,
+  `pos` int(11) DEFAULT NULL,
+  `df` int(11) DEFAULT NULL,
+  `F` float(11) DEFAULT NULL,
+  `p` float(11) DEFAULT NULL,
+  `add_effect` float(11) DEFAULT NULL,
+  `add_f` float(11) DEFAULT NULL,
+  `add_p` float(11) DEFAULT NULL,
+  `dom_effect` float(11) DEFAULT NULL,
+  `dom_f` float(11) DEFAULT NULL,
+  `dom_p` float(11) DEFAULT NULL,
+  `errordf` int(11) DEFAULT NULL,
+  `markerR2` float(11) DEFAULT NULL,
+  `genetic_var` float(11) DEFAULT NULL,
+  `residual_var` float(11) DEFAULT NULL,
+  `LnLikelihood` float(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=gbk
