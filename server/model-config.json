@@ -9,19 +9,19 @@
   },
   "AccessToken": {
     "dataSource": "mysqlDs",
-    "public": false
+    "public": true
   },
   "ACL": {
     "dataSource": "mysqlDs",
-    "public": false
+    "public": true
   },
   "RoleMapping": {
     "dataSource": "mysqlDs",
-    "public": false
+    "public": true
   },
   "Role": {
     "dataSource": "mysqlDs",
-    "public": false
+    "public": true
   },
   "CoffeeShop": {
     "dataSource": "mysqlDs",
