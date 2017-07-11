@@ -37,3 +37,4 @@ node .
 # 其他问题
 ## 如何设置loopback接口支持跨域
 参考教程  http://loopback.io/doc/en/lb2/Security-considerations.html#deprecation-of-built-in-cors-middleware
+## 数据第一行描述信息记得加一个#在前面

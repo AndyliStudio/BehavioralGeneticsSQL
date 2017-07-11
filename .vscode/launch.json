@@ -8,13 +8,13 @@
       "type": "node",
       "request": "launch",
       "name": "readAndSave",
-      "program": "${workspaceRoot}/server/boot/readAndSave.js"
+      "program": "${workspaceRoot}/server/tools/readAndSave.js"
     },
     {
       "type": "node",
       "request": "launch",
       "name": "createTable",
-      "program": "${workspaceRoot}/server/boot/createTable.js"
+      "program": "${workspaceRoot}/server/tools/createTable.js"
     }
   ]
 }
