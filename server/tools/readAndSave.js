@@ -81,7 +81,7 @@ function doRead(url, filename, total){
  * @param cb 回调
  */
 function doSave(modlename, data, cb){
-  app.models[modlename].upsert({pathway: data.pathway, url: data.url, genes: data.genes}, function(err, res){
+  app.models[modlename].findOrCreate({pathway: data.pathway}, {pathway: data.pathway, url: data.url, genes: data.genes}, function(err, res){
     if(err){
       if(typeof cb === 'function'){
         cb({id: data.pathway, msg:err.toString()})
