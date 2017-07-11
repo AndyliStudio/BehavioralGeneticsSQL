@@ -7,35 +7,32 @@
       "./models"
     ]
   },
-  "User": {
-    "dataSource": "db"
-  },
   "AccessToken": {
-    "dataSource": "db",
-    "public": false
+    "dataSource": "mysqlDs",
+    "public": true
   },
   "ACL": {
-    "dataSource": "db",
-    "public": false
+    "dataSource": "mysqlDs",
+    "public": true
   },
   "RoleMapping": {
-    "dataSource": "db",
-    "public": false
+    "dataSource": "mysqlDs",
+    "public": true
   },
   "Role": {
-    "dataSource": "db",
-    "public": false
+    "dataSource": "mysqlDs",
+    "public": true
   },
   "CoffeeShop": {
     "dataSource": "mysqlDs",
     "public": true
   },
   "Review": {
-    "dataSource": "mongoDs",
+    "dataSource": "mysqlDs",
     "public": true
   },
   "Reviewer": {
-    "dataSource": "mongoDs",
+    "dataSource": "mysqlDs",
     "public": true
   },
   "gene_info": {

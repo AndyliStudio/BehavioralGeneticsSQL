@@ -7,13 +7,15 @@
     "validateUpsert": true
   },
   "properties": {
-    "pathway_name": {
+    "pathway": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "url": {
       "type": "string"
     },
-    "des": {
-      "type": "string"
-    },
-    "contain_genes": {
+    "genes": {
       "type": [
         "string"
       ]

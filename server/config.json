@@ -2,7 +2,8 @@
   "restApiRoot": "/api",
   "host": "0.0.0.0",
   "legacyExplorer": false,
-  "port": 3000,
+  "port": 9000,
+  "logoutSessionsOnSensitiveChanges": true,
   "remoting": {
     "context": {
       "enableHttpContext": false
@@ -19,10 +20,7 @@
       "extended": true,
       "limit": "100kb"
     },
-    "cors": {
-      "origin": true,
-      "credentials": true
-    },
+    "cors": false,
     "errorHandler": {
       "disableStackTrace": false
     }

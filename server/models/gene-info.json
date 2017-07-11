@@ -6,44 +6,39 @@
     "validateUpsert": true
   },
   "properties": {
-    "gene_name": {
-      "type": "string",
-      "required": true,
-      "default": "undefined"
-    },
-    "chromosomes_name": {
-      "type": "string",
-      "required": true,
-      "default": "undefined"
-    },
-    "start_location": {
+    "replicon_name": {
       "type": "string"
     },
-    "end_location": {
+    "replicon_accession": {
       "type": "string"
+    },
+    "start": {
+      "type": "number"
+    },
+    "stop": {
+      "type": "number"
+    },
+    "strand": {
+      "type": "string"
+    },
+    "gene_id": {
+      "type": "number"
+    },
+    "locus": {
+      "type": "string"
+    },
+    "protein_name": {
+      "type": "string"
+    },
+    "protein_product": {
+      "type": "string"
+    },
+    "length": {
+      "type": "number"
     }
   },
   "validations": [],
   "relations": {},
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "DENY"
-    },
-    {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "WRITE",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
-    }
-  ],
+  "acls": [],
   "methods": {}
 }

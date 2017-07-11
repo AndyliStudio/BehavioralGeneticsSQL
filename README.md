@@ -33,3 +33,7 @@ slc run
 node .
 ```
 然后在浏览器打开 [http://localhost:9000/](http://localhost:9000/)
+
+# 其他问题
+## 如何设置loopback接口支持跨域
+参考教程  http://loopback.io/doc/en/lb2/Security-considerations.html#deprecation-of-built-in-cors-middleware
