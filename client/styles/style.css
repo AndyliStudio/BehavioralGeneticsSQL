@@ -174,7 +174,7 @@ single-work span i.fa,
 }
 
 .default-menu.navbar-default .navbar-nav > li > a{
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0;
   line-height: 40px !important;
@@ -891,7 +891,6 @@ strong.expert-tag{
   background-color: #4A6BB5;
   color: #fff;
   cursor: pointer;
-  float: right;
   font-size: 16px;
   height: 30px;
   margin-top: 0;
@@ -1014,7 +1013,7 @@ strong.expert-tag{
 }
 body {
   font-family:'courier new';
-  font-size:1rem;
+  font-size: 14px;
 }
 button {
   background:#eee;
@@ -1113,11 +1112,144 @@ textarea {
   width:300px;
 }
 
-/*关于登陆页面的一些样式*/
-.need-margin{
-    min-height: 500px;
-    margin-top: 70px;
+/* 返回首页的样式 */
+.footer .text-center{
+  position: relative;
 }
-.login-container{
-    
+.scroll-span{
+    display: inline-block;
+    height: 30px;
+    position: absolute;
+    right: 10px;
+}
+.scroll{
+    display: inline-block;
+    height: 30px;
+}
+/* 让底部条局底 */
+#home{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+#home .content{
+  flex: 1;
+  padding-top: 70px;
+  box-sizing: border-box;
+}
+
+/* main页面 */
+
+/* gene_region页面样式 */
+.geneRegion-container .searchDiv{
+    position: absolute;
+    width: auto;
+    height: 40px;
+    top:20%;
+    left: 50%;
+    transform: translate(-50%);
+    white-space: nowrap;
+}
+.geneRegion-container .searchDiv > input{
+    height: 40px;
+    background-color: white;
+    padding: 0px 20px;
+    border: 0px;
+    margin-bottom: 0px;
+}
+
+.geneRegion-container .searchDiv > button{
+    padding: 0px;
+    border: 0px;
+    height: 40px;
+    width: 100px;
+    background-color: #dBdAd9;
+    position: relative;
+    top: -1px;
+    font-size: 14px;
+}
+.geneRegion-container .searchHistory{
+    position: absolute;
+    width: 900px;
+    height: 120px;
+    left: 50%;
+    top:35%;
+    margin-left: -450px;
+    margin-top: -60px;
+}
+.geneRegion-container .searchHistory a{
+    text-decoration: solid;
+    margin-right: 20px;
+}
+.geneRegion-container .searchHistory div{
+    background-color: #dBdAd9;
+    height: 100px;
+    padding: 20px;
+}
+
+.geneRegion-container .friendLink{
+    position: absolute;
+    width: 900px;
+    height: 120px;
+    left: 50%;
+    top:62%;
+    margin-left: -450px;
+    margin-top: -60px;
+}
+.geneRegion-container .friendLinkChild{
+    background-color: #dBdAd9;
+}
+.geneRegion-container .friendLinkChild div{
+    float: left;
+    margin-right: 20px;
+    width: 100px;
+    height:100px;
+    background-color: #3f86b7;
+}
+
+/*写部分关于表格的css*/
+.geneRegion-container table.hovertable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #999999;
+    border-collapse: collapse;
+}
+.geneRegion-container table.hovertable th {
+    background-color:#c3dde0;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}
+.geneRegion-container table.hovertable tr {
+    background-color:#d4e3e5;
+}
+.geneRegion-container table.hovertable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}
+
+/* login 页面样式 */
+.login-container h2{
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20vh;
+    margin-bottom: 2em;
+}
+.login-container .form-group{
+    text-align: center;
+}
+.login-container .form-group > label{
+    margin-left: -25vh;
+}
+.login-container .actions{
+    text-align: center;
+}
+.login-container .actions > button{
+    text-align: center;
+    padding: .5rem 1rem;
 }

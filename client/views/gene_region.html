@@ -1,23 +1,22 @@
-<div class="gene_region-container need-margin">
-    <div id="searchDiv">
-        <input type="search" placeholder="输入你想要查询的基因或物种" name="search" size=50 ng-model="searchString"/><button>Search</button>
+<div class="geneRegion-container">
+    <div class="searchDiv">
+        <input type="search" placeholder="输入你想要查询的基因或物种" name="search" size=50 ng-model="searchString"/><button>搜索</button>
         <li ng-repeat="i in items | searchFor:searchString">
 				<p>{{i}}</p>
 			</li>
 		</ul>
     </div>
     <!--{{resultData}}-->
-    <!--<div id="searchHistory">
+    <!--<div class="searchHistory">
         <h3>搜索历史</h3>
         <div><a href="#">ENSG00000139618</a><a href="#">YBL058W</a></div>
     </div>
     <div id="friendLink">
         <h3>友情链接</h3>
-        <div id="friendLinkChild">
+        <div class="friendLinkChild">
             <div></div>
             <div></div>
             <div></div>
         </div>
-
     </div>-->
 </div>
