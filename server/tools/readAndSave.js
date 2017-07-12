@@ -1,10 +1,22 @@
 // 数据导入工具, 执行导入操作 cd /server/boot/ && node readAndSave.js
 
 const file_config = {
-  geneinfo: { url: '../../test_data/gene_info.txt', total_lines: '' },
-  pathway: { url: '../../test_data/pathway.txt', total_lines: 217 },
-  snpinfo: { url: '../../test_data/snp_info.txt', total_lines: 3515 }
+  geneinfo: {
+    url: '../../test_data/gene_info.txt',
+    total_lines: ''
+  },
+  pathway: {
+    url: '../../test_data/pathway.txt',
+    total_lines: 217
+  },
+  snpinfo: {
+    url: '../../test_data/snp_info.txt',
+    total_lines: 3514
+  }
 }
+var pathwayCountNum = 0
+var snpinfoNum = 0
+var geneinfoNum = 0
 
 const readline = require('readline')
 const fs = require("fs")
@@ -20,10 +32,11 @@ var ep03 = new eventproxy()
 ep01.all('readPathway', function (pathway) {
   if (pathway === 'success') {
     ep02.all('readSnpinfo', function (snpinfo) {
-      if (snpinfp === 'success') {
+      if (snpinfo === 'success') {
         ep03.all('readGeneinfo', function (snpinfo) {
-          if (snpinfp === 'success') {
-            console.log('读取完毕！');
+          if (snpinfo === 'success') {
+            console.log('\n读取完毕！')
+            process.exit(0)
           } else if (snpinfo === 'fail') {
             console.log('读取并存储geneinfo失败！');
           }
@@ -57,7 +70,7 @@ doRead(path.resolve(__dirname, file_config.pathway.url), 'pathway.txt', file_con
  */
 function doRead(url, filename, total, callback) {
   // 初始化一个进度条长度为 50 的 ProgressBar 实例
-  let pb = new ProgressBar('读取并存储 '+ filename +' :bar :percent :current/:total', {
+  let pb = new ProgressBar('读取并存储 ' + filename + ' :bar :percent :current/:total', {
     complete: '█',
     incomplete: '░',
     width: 30,
@@ -87,18 +100,17 @@ function doRead(url, filename, total, callback) {
         finalData.genes = byteArr
         doSave('pathway', finalData, function (obj) {
           if (!obj) {
-            pb.tick({'current': ++ num, 'percent': num/total*100 + '%'})
+            pb.tick({
+              'current': ++num,
+              'percent': num / total * 100 + '%'
+            })
             if (pb.complete) {
               if (typeof callback === 'function') {
                 callback('success')
               }
-            }else if(pb.curr === 100){
-              pb.interrupt('出错了')
-              pb.interrupt('出错了')
-              pb.interrupt('出错了')
             }
           } else {
-            pb.interrupt()
+            pb.interrupt('第 ' + pb.curr + '行的pathway ' + obj.id + ' 读取失败, 错误原因: ' + obj.msg)
           }
         })
       } else if (filename === 'snp_info.txt') {
@@ -123,35 +135,51 @@ function doRead(url, filename, total, callback) {
         finalData02.LnLikelihood = byteArr[17]
         doSave('snp_info', finalData02, function (obj) {
           if (!obj) {
-            pb.tick({'current': ++ num, 'percent': num/total*100 + '%'})
-            if (num === total) {
+            pb.tick({
+              'current': ++num,
+              'percent': num / total * 100 + '%'
+            })
+            // pb.interrupt('现在是第'+num+'行')
+            if (pb.complete) {
               if (typeof callback === 'function') {
                 callback('success')
               }
             }
           } else {
-            if (num === total) {
-              if (typeof callback === 'function') {
-                callback('success')
-              }
-              // 输出所有的错误日志
-              error_output.forEach(item => {
-                console.log('第 ' + item.num + '行的pathway ' + item.id + ' 读取失败, 错误原因: ' + item.msg);
-              })
-            } else {
-              obj.num = num
-              error_output.push(obj)
-            }
+            pb.interrupt('第 ' + pb.curr + '行的gene_info ' + obj.id + ' 读取失败, 错误原因: ' + obj.msg)
           }
         })
       } else if (filename === 'gene_info.txt') {
-
+        let finalData02 = {}
+        finalData02.replicon_name = byteArr[0]
+        finalData02.replicon_accession = byteArr[1]
+        finalData02.start = byteArr[2]
+        finalData02.stop = byteArr[3]
+        finalData02.strand = byteArr[4]
+        finalData02.gene_id = byteArr[5]
+        finalData02.locus = byteArr[6]
+        finalData02.protein_product = byteArr[7]
+        finalData02.length = byteArr[8]
+        finalData02.protein_name = byteArr[9]
+        doSave('gene_info', finalData02, function (obj) {
+          if (!obj) {
+            pb.tick({
+              'current': ++num,
+              'percent': num / total * 100 + '%'
+            })
+            // pb.interrupt('现在是第'+num+'行')
+            if (pb.complete) {
+              if (typeof callback === 'function') {
+                callback('success')
+              }
+            }
+          } else {
+            pb.interrupt('第 ' + pb.curr + '行的snp_info ' + obj.id + ' 读取失败, 错误原因: ' + obj.msg)
+          }
+        })
       }
     } catch (error) {
-      console.log(error)
-      error_output.forEach(item => {
-        console.log('第 ' + item.num + '行读取失败, 错误原因: ' + error.toString());
-      })
+      pb.interrupt(error.toString())
       if (typeof callback === 'function') {
         callback('fail')
       }
@@ -167,10 +195,17 @@ function doRead(url, filename, total, callback) {
  */
 function doSave(modelname, data, cb) {
   if (modelname === 'pathway') {
-    app.models.pathway.findOrCreate({ pathway: data.pathway }, { pathway: data.pathway, url: data.url, genes: data.genes }, function (err, res) {
+    app.models.pathway.upsert({
+      pathway: data.pathway,
+      url: data.url,
+      genes: data.genes
+    }, function (err, res) {
       if (err) {
         if (typeof cb === 'function') {
-          cb({ id: data.pathway, msg: err.toString() })
+          cb({
+            id: data.pathway,
+            msg: err.toString()
+          })
         }
         return
       }
@@ -179,10 +214,58 @@ function doSave(modelname, data, cb) {
       }
     })
   } else if (modelname === 'snp_info') {
-    app.models.snp_info.findOrCreate({ marker: data.marker }, { marker: data.marker, chr: data.chr, pos: data.pos, df: data.df, F: data.F, p: data.p, add_effect: data.add_effect, add_f: data.add_f, add_p: data.add_p, dom_effect: data.dom_effect, dom_f: data.dom_f, dom_p: data.dom_p, errordf: data.errordf, markerR2: data.markerR2, genetic_var: data.genetic_var, residual_var: data.residual_var, LnLikelihood: data.LnLikelihood }, function (err, res) {
+    app.models.snp_info.upsert({
+      trait: data.trait,
+      marker: data.marker,
+      chr: data.chr,
+      pos: data.pos,
+      df: data.df,
+      F: data.F,
+      p: data.p,
+      add_effect: data.add_effect,
+      add_f: data.add_f,
+      add_p: data.add_p,
+      dom_effect: data.dom_effect,
+      dom_f: data.dom_f,
+      dom_p: data.dom_p,
+      errordf: data.errordf,
+      markerR2: data.markerR2,
+      genetic_var: data.genetic_var,
+      residual_var: data.residual_var,
+      LnLikelihood: data.LnLikelihood
+    }, function (err, res) {
       if (err) {
         if (typeof cb === 'function') {
-          cb({ id: data.marker, msg: err.toString() })
+          cb({
+            id: data.marker,
+            msg: err.toString()
+          })
+        }
+        return
+      }
+      if (typeof cb === 'function') {
+        cb()
+      }
+    })
+  } else if (modelname === 'gene_info') {
+    app.models.gene_info.upsert({
+      replicon_name: data.replicon_name,
+      replicon_accession: data.replicon_accession,
+      start: data.start,
+      stop: data.stop,
+      strand: data.strand,
+      gene_id: data.gene_id,
+      locus: data.locus,
+      protein_product: data.protein_product,
+      length: data.length,
+      protein_name: data.protein_name
+    }, function (err, res) {
+      if (err) {
+        if (typeof cb === 'function') {
+          cb({
+            id: data.gene_id,
+            msg: err.toString()
+          })
         }
         return
       }
