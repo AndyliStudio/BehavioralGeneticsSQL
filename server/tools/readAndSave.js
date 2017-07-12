@@ -9,7 +9,7 @@ const file_config = {
 const readline = require('readline')
 const fs = require("fs")
 var path = require('path')
-var ProgressBar = require('./progressBar')
+var ProgressBar = require('progress')
 var app = require(path.resolve(__dirname, '../server'))
 var eventproxy = require('eventproxy')
 
@@ -57,7 +57,12 @@ doRead(path.resolve(__dirname, file_config.pathway.url), 'pathway.txt', file_con
  */
 function doRead(url, filename, total, callback) {
   // 初始化一个进度条长度为 50 的 ProgressBar 实例
-  let pb = new ProgressBar('读取并存储' + filename + ' ', 50)
+  let pb = new ProgressBar('读取并存储 '+ filename +' :bar :percent :current/:total', {
+    complete: '█',
+    incomplete: '░',
+    width: 30,
+    total: total
+  })
   let error_output = []
   // 这里只是一个 pb 的使用示例，不包含任何功能
   let num = 0
@@ -82,25 +87,18 @@ function doRead(url, filename, total, callback) {
         finalData.genes = byteArr
         doSave('pathway', finalData, function (obj) {
           if (!obj) {
-            pb.render({ completed: ++num, total: total })
-            if (num === total) {
+            pb.tick({'current': ++ num, 'percent': num/total*100 + '%'})
+            if (pb.complete) {
               if (typeof callback === 'function') {
                 callback('success')
               }
+            }else if(pb.curr === 100){
+              pb.interrupt('出错了')
+              pb.interrupt('出错了')
+              pb.interrupt('出错了')
             }
           } else {
-            if (num === total) {
-              if (typeof callback === 'function') {
-                callback('success')
-              }
-              // 输出所有的错误日志
-              error_output.forEach(item => {
-                console.log('第 ' + item.num + '行的pathway ' + item.id + ' 读取失败, 错误原因: ' + item.msg);
-              })
-            } else {
-              obj.num = num
-              error_output.push(obj)
-            }
+            pb.interrupt()
           }
         })
       } else if (filename === 'snp_info.txt') {
@@ -125,7 +123,7 @@ function doRead(url, filename, total, callback) {
         finalData02.LnLikelihood = byteArr[17]
         doSave('snp_info', finalData02, function (obj) {
           if (!obj) {
-            pb.render({ completed: ++num, total: total })
+            pb.tick({'current': ++ num, 'percent': num/total*100 + '%'})
             if (num === total) {
               if (typeof callback === 'function') {
                 callback('success')
