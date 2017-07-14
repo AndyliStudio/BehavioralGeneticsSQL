@@ -44,3 +44,16 @@ node server/tools/readAndSave.js
 
 ```
 ![autoImport](https://olpkwt43d.qnssl.com/benefit/autoImport.png)
+
+# 基因查询的算法
+snpinfo====>
+trait --- input search 
+user input  if p < user input print
+
+gene_info --- Locus --- snpinfo.pos in (start, stop) && user input < p ===> print
+              [start, stop] --- snpinfo.pos in (start, stop) && user input < p ===> print
+
+snp-info
+marker --- 显示marker相关信息
+
+pathway_name --- genes --- gene -- 基因名字－－gene_info.locus && user input < p ===> print -- print

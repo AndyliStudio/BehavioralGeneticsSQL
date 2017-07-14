@@ -1,0 +1,11 @@
+snpinfo====>
+trait --- input search 
+user input  if p < user input print
+
+gene_info --- Locus --- snpinfo.pos in (start, stop) && user input < p ===> print
+              [start, stop] --- snpinfo.pos in (start, stop) && user input < p ===> print
+
+ｓｎｐ-info
+marker --- 显示ｍａｒｋｅｒ相关信息
+
+pathway_name --- genes --- gene -- 基因名字－－gene_info.locus && user input < p ===> print -- print

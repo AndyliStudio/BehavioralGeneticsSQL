@@ -4,12 +4,10 @@
 <head>
   <meta charset="utf-8">
   <title>人类行为遗传基因数据库</title>
-  <!-- build:css({.tmp,app}) styles/main.css -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/font-awesome.min.css">
   <link rel="stylesheet" href="styles/linearicons.css">
   <link rel="stylesheet" href="styles/owl.carousel.css">
-  <link rel="stylesheet" href="styles/owl.theme.css">
   <link rel="stylesheet" href="styles/responsive.css">
   <link rel="stylesheet" href="styles/style.css">
   <!-- endbuild -->
@@ -43,10 +41,18 @@
                   <li><a class="scroll" href="#contact">联系我们</a></li>
                   <li>
                     <button type="button" class="btn btn-default navbar-btn" ui-sref="login" ng-hide="currentUser">登陆</button>
-                    <a href="" ng-show="currentUser">{{currentUser.email}}</a>
+                    <span class="or" ng-hide="currentUser">or</span>
+                    <button type="button" class="btn btn-default navbar-btn" ui-sref="sign-up" ng-hide="currentUser">注册</button>
+                    <a href="" ng-show="currentUser" id="username">{{currentUser.username}}</a>
+                    <div class="dropdown-list" ng-show="currentUser">
+                      <ul>
+                        <li>个人信息</li>
+                        <li>搜索历史</li>
+                        <li ng-click="logout()">退出登录</li>
+                      </ul>
+                    </div>
                   </li>
                 </ul>
-
               </div>
             </div>
           </div>
@@ -79,10 +85,8 @@
   <script src="js/app.js"></script>
   <script src="js/services/lb-services.js"></script>
   <script src="js/controllers/auth.js"></script>
-  <script src="js/controllers/review.js"></script>
   <script src="js/services/auth.js"></script>
   <script src="js/controllers/gene_region.controller.js"></script>
-  <script src="js/controllers/login.controller.js"></script>
   <!--滑动效果-->
   <script type="text/javascript" defer="defer">
     $(document).ready(function () {
@@ -102,6 +106,11 @@
         });
       });
     });
+    // 个人中心下拉菜单
+    $('#username').click(function () {
+      $('.dropdown-list').toggle()
+    });
+    $('#username').trigger('click')
   </script>
 </body>
 

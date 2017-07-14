@@ -23,18 +23,6 @@
     "dataSource": "mysqlDs",
     "public": true
   },
-  "CoffeeShop": {
-    "dataSource": "mysqlDs",
-    "public": true
-  },
-  "Review": {
-    "dataSource": "mysqlDs",
-    "public": true
-  },
-  "Reviewer": {
-    "dataSource": "mysqlDs",
-    "public": true
-  },
   "gene_info": {
     "dataSource": "mysqlDs",
     "public": true
@@ -44,6 +32,10 @@
     "public": true
   },
   "snp_info": {
+    "dataSource": "mysqlDs",
+    "public": true
+  },
+  "user": {
     "dataSource": "mysqlDs",
     "public": true
   }

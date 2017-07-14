@@ -6,7 +6,7 @@ var app = require(path.resolve(__dirname, '../server'))
 var eventproxy = require('eventproxy')
 
 var ep = new eventproxy()
-ep.all('AccessToken', 'ACL', 'RoleMapping', 'Role', 'gene_info', 'pathway', 'snp_info', function(accesstoken, acl, rolemapping, role, geneinfo, pathway, snpinfo){
+ep.all('user', 'AccessToken', 'ACL', 'RoleMapping', 'Role', 'gene_info', 'pathway', 'snp_info', function(accesstoken, acl, rolemapping, role, geneinfo, pathway, snpinfo){
   console.log('\nEverything is ready!')
   dataSource.disconnect()
   process.exit(0)
@@ -15,6 +15,12 @@ ep.all('AccessToken', 'ACL', 'RoleMapping', 'Role', 'gene_info', 'pathway', 'snp
 var dataSource = app.dataSources.mysqlDs
 
 //生成必备表
+dataSource.automigrate('user', function (err) {
+  if (err) throw err
+  console.log('user表初始化完毕!')
+  ep.emit('user', '')
+})
+
 dataSource.automigrate('AccessToken', function (err) {
   if (err) throw err
   console.log('AccessToken表初始化完毕!')

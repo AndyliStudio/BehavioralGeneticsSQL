@@ -1,22 +1,21 @@
 <div class="login-container">
-  <form name="form" ng-submit="login()">
+  <form name="form" ng-submit="login()" novalidate>
     <h2>登录EODream</h2>
     <div class="form-group">
-      <label>Email</label>
-      <input type="text" ng-model="user.email">
-      <p class="hint" ng-show="form.email.$error.required && submitted">Email is required
-      </p>
+      <label>请输入邮箱</label>
+      <input name="email" type="email" ng-model="user.email" required />
+      <span class="hint" ng-show="form.email.$error.required  && form.$submitted">请填写邮箱</span>
+      <span class="hint" ng-show="form.email.$error.email  && form.$submitted">请输入合法邮箱</span>
     </div>
 
     <div class="form-group">
-      <label>Password</label>
-      <input type="password" ng-model="user.password">
-      <p class="hint" ng-show="form.password.$error.required && submitted">
-        Password is required</p>
+      <label>请输入密码</label>
+      <input name="password" type="password" ng-model="user.password" required />
+      <span class="hint" ng-show="form.password.$error.required && form.$submitted">请填写密码</span>
     </div>
 
     <div class="actions">
-      <button>Login</button>
+      <button>登录</button>
     </div>
   </form>
 </div>

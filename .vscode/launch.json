@@ -7,6 +7,12 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "server",
+      "program": "${workspaceRoot}/server/server.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "readAndSave",
       "program": "${workspaceRoot}/server/tools/readAndSave.js"
     },

@@ -30,8 +30,24 @@ angular
       return result;
     };
   })
-  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider,
-    $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider,
+    $urlRouterProvider, $httpProvider) {
+    // 处理没有权限的请求
+    $httpProvider.interceptors.push(function ($q, $location, LoopBackAuth) {
+      return {
+        responseError: function (rejection) {
+          if (rejection.status == 401) {
+            // Clearing the loopback values from client browser for safe logout...
+            LoopBackAuth.clearUser();
+            LoopBackAuth.clearStorage();
+            $location.nextAfterLogin = $location.path();
+            $location.path('/login');
+          }
+          return $q.reject(rejection);
+        }
+      };
+    });
+    // 声明路由
     $stateProvider
       .state('add-review', {
         url: '/add-review',
@@ -68,12 +84,6 @@ angular
         url: '/logout',
         controller: 'AuthLogoutController'
       })
-      .state('my-reviews', {
-        url: '/my-reviews',
-        templateUrl: 'views/my-reviews.html',
-        controller: 'MyReviewsController',
-        authenticate: true
-      })
       .state('sign-up', {
         url: '/sign-up',
         templateUrl: 'views/sign-up-form.html',
@@ -98,7 +108,8 @@ angular
       })
       .state('marker', {
         url: '/marker',
-        templateUrl: 'views/marker.html'
+        templateUrl: 'views/marker.html',
+        controller: 'MarkerController'
       })
       .state('pathway', {
         url: '/pathway',
@@ -110,8 +121,12 @@ angular
       });
     $urlRouterProvider.otherwise('main');
   }])
-  .run(['$rootScope', '$state', function ($rootScope, $state) {
+  .run(['$rootScope', '$state', 'AuthService', function ($rootScope, $state, AuthService) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
+      // 判断用户token是否有效
+      if (AuthService.isAuthenticated()) {
+        AuthService.getUserLoginInfo()
+      }
       // redirect to login page if not logged in
       if (next.authenticate && !$rootScope.currentUser) {
         event.preventDefault(); //prevent current page from loading
