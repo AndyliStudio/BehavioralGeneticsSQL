@@ -43,12 +43,23 @@
                     <button type="button" class="btn btn-default navbar-btn" ui-sref="login" ng-hide="currentUser">登陆</button>
                     <span class="or" ng-hide="currentUser">or</span>
                     <button type="button" class="btn btn-default navbar-btn" ui-sref="sign-up" ng-hide="currentUser">注册</button>
-                    <a href="" ng-show="currentUser" id="username">{{currentUser.username}}</a>
+                    <!-- <a href="" ng-show="currentUser" id="username">{{currentUser.username}}</a>
                     <div class="dropdown-list" ng-show="currentUser">
                       <ul>
                         <li>个人信息</li>
                         <li>搜索历史</li>
                         <li ng-click="logout()">退出登录</li>
+                      </ul>
+                    </div> -->
+                    <div class="btn-group" uib-dropdown ng-show="currentUser">
+                      <button type="button" class="btn" uib-dropdown-toggle>
+                        {{currentUser.username}}
+                        <span class="caret"></span>
+                        </button>
+                      <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                        <li role="menuitem"><a href="#">个人信息</a></li>
+                        <li role="menuitem"><a href="#">搜索历史</a></li>
+                        <li role="menuitem" ng-click="logout()"><a href="#">退出登录</a></li>
                       </ul>
                     </div>
                   </li>
@@ -82,11 +93,11 @@
   <script src="vendor/angular-resource.js"></script>
   <script src="vendor/angular-ui-router.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/services/lb-services.js"></script>
   <script src="js/controllers/auth.js"></script>
   <script src="js/services/auth.js"></script>
-  <script src="js/controllers/gene_region.controller.js"></script>
   <!--滑动效果-->
   <script type="text/javascript" defer="defer">
     $(document).ready(function () {

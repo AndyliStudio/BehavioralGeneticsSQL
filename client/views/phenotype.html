@@ -1,18 +1,65 @@
-<div class="phenotype-container need-margin">
-    <div id="searchDiv">
-        <input type="search" placeholder="输入你想要查询的基因或物种" name="search" size=50/><button>Search</button>
-    </div>
-    <div id="searchHistory">
-        <h3>搜索历史</h3>
-        <div><a href="#">ENSG00000139618</a><a href="#">YBL058W</a></div>
-    </div>
-    <div id="friendLink">
-        <h3>友情链接</h3>
-        <div id="friendLinkChild">
-            <div></div>
-            <div></div>
-            <div></div>
+<div class="phenotype-container">
+    <h1>查找指定phenotype相关的所有显著SNP</h1>
+    <div class="searchDiv">
+        <div class="input"><input type="search" placeholder="输入你想要查询的trait" name="search" ng-model="sstr" ng-change="searchTrait()" />
+            <button ng-click="showTrait(suggests[0].id, suggests[0].text)">搜索</button>
         </div>
-
+        <div class="search-suggest" ng-show="suggests.length > 0 && isShowSuggest">
+            <ul>
+                <li ng-repeat="item in suggests" data-id="item.id" ng-click="showTrait(item.id, item.text)">{{item.text}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="result" ng-show="thisTrait.trait">
+        <p>查询得到的信息如下：</p>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>marker</td>
+                    <td>{{thisTrait.marker}}</td>
+                    <td>id</td>
+                    <td>{{thisTrait.id}}</td>
+                </tr>
+                <tr>
+                    <td>trait</td>
+                    <td>{{thisTrait.trait}}</td>
+                    <td>chr</td>
+                    <td>{{thisTrait.chr}}</td>
+                </tr>
+                <tr>
+                    <td>pos</td>
+                    <td>{{thisTrait.pos}}</td>
+                    <td>df</td>
+                    <td>{{thisTrait.df}}</td>
+                </tr>
+                <tr>
+                    <td>F</td>
+                    <td>{{thisTrait.F}}</td>
+                    <td>p</td>
+                    <td>{{thisTrait.p}}</td>
+                </tr>
+                <tr>
+                    <td>add_effect</td>
+                    <td>{{thisTrait.add_effect}}</td>
+                    <td>dom_f</td>
+                    <td>{{thisTrait.dom_f}}</td>
+                </tr>
+                <tr>
+                    <td>dom_p</td>
+                    <td>{{thisTrait.dom_p}}</td>
+                    <td>errordf</td>
+                    <td>{{thisTrait.errordf}}</td>
+                </tr>
+                <tr>
+                    <td>markerR2</td>
+                    <td>{{thisTrait.markerR2}}</td>
+                    <td>genetic_var</td>
+                    <td>{{thisTrait.genetic_var}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="param-des">
+            参数注释如下：&nbsp;marker: 基因标识，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述
+        </p>
     </div>
 </div>

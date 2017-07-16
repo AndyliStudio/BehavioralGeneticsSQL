@@ -3,9 +3,10 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-module.exports = function(app) {
-  // Install a "/ping" route that returns "pong"
-  app.get('/ping', function(req, res) {
-    res.send('pong');
-  });
+
+module.exports = function (app) {
+  // 数据下载的接口，导出为excel
+  app.post('/api/download', function (req, res, next) {
+    console.log(req)
+  })
 };

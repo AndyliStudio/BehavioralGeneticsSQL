@@ -6,7 +6,8 @@
 angular
   .module('app', [
     'ui.router',
-    'lbServices'
+    'lbServices',
+    'ui.bootstrap'
   ])
   .filter('searchFor', function () {
 

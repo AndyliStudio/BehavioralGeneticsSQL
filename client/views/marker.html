@@ -1,7 +1,7 @@
 <div class="marker-container">
     <h1>查询marker的详细信息</h1>
     <div class="searchDiv">
-        <div class="input"><input type="search" placeholder="输入你想要查询的基因或物种" name="search" ng-model="sstr" ng-change="searchMarker()" />
+        <div class="input"><input type="search" placeholder="输入你想要查询的marker" name="search" ng-model="sstr" ng-change="searchMarker()" />
             <button ng-click="showMarker(suggests[0].id, suggests[0].text)">搜索</button>
         </div>
         <div class="search-suggest" ng-show="suggests.length > 0 && isShowSuggest">

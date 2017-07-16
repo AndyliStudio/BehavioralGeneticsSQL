@@ -78,4 +78,36 @@ angular
             $scope.thisMarker = res[0]
           })
       };
+    }])
+  .controller('PhenotypeController', ['$scope', 'Snp_info', '$state',
+    function ($scope, Snp_info, $state) {
+      $scope.sstr = ''
+      $scope.suggests = []
+      $scope.thisTrait = {}
+      $scope.isShowTable = false
+      $scope.isShowSuggest = false
+      $scope.searchTrait = function () {
+        $scope.isShowSuggest = true
+        Snp_info.find({ filter: { where: { trait: { like: "%" + $scope.sstr + "%" } }, fields: { trait: true, id: true } } })
+          .$promise
+          .then(function (res) {
+            if (res instanceof Array) {
+              res.forEach(item => {
+                if ($scope.suggests.length < 10) {
+                  $scope.suggests.push({ id: item.id, text: item.trait })
+                }
+              })
+            }
+          })
+      };
+      $scope.showTrait = function (id, trait) {
+        $scope.sstr = trait
+        Snp_info.find({ filter: { where: { id: id } } })
+          .$promise
+          .then(function (res) {
+            $scope.isShowSuggest = false
+            $scope.isShowTable = true
+            $scope.thisTrait = res[0]
+          })
+      };
     }]);
