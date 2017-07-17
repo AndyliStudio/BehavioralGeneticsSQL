@@ -82,6 +82,7 @@ angular
   .controller('PhenotypeController', ['$scope', 'Snp_info', '$state',
     function ($scope, Snp_info, $state) {
       $scope.sstr = ''
+      $scope.pValue = ''
       $scope.suggests = []
       $scope.thisTrait = {}
       $scope.isShowTable = false

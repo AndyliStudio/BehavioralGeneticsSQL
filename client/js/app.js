@@ -100,7 +100,8 @@ angular
       })
       .state('phenotype', {
         url: '/phenotype',
-        templateUrl: 'views/phenotype.html'
+        templateUrl: 'views/phenotype.html',
+        controller: 'PhenotypeController'
       })
       .state('gene_region', {
         url: '/gene_region',

@@ -1,8 +1,12 @@
 <div class="phenotype-container">
     <h1>查找指定phenotype相关的所有显著SNP</h1>
     <div class="searchDiv">
-        <div class="input"><input type="search" placeholder="输入你想要查询的trait" name="search" ng-model="sstr" ng-change="searchTrait()" />
-            <button ng-click="showTrait(suggests[0].id, suggests[0].text)">搜索</button>
+        <div class="input">
+            <!-- <select ng-init="selectedName = pValueArr[0]" ng-model="pValue" ng-options="x for x in pValueArr"></select> -->
+            <span>阀值p</span>
+            <input type="number" placeholder="输入阀值" name="p-value" ng-model="pValue" />
+            <input type="search" placeholder="输入你想要查询的trait" name="search" ng-model="sstr" ng-change="searchTrait()" />
+            <button ng-click="searchTrait(suggests[0].id, suggests[0].text)">搜索</button>
         </div>
         <div class="search-suggest" ng-show="suggests.length > 0 && isShowSuggest">
             <ul>

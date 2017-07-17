@@ -1591,6 +1591,10 @@ textarea {
     margin-bottom: 0px;
 }
 
+.phenotype-container .searchDiv .input>input[name="p-value"] {
+    width: 8em;
+}
+
 .phenotype-container .searchDiv .input>button {
     padding: 0px;
     border: 0px;
