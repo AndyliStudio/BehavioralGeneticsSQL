@@ -94,7 +94,12 @@ angular
           .then(function (res) {
             if (res instanceof Array) {
               res.forEach(item => {
-                if ($scope.suggests.length < 10) {
+                // 判断item.trait是不是在suggests中存在，不存在则添加
+                let hasExist = $scope.suggests.some(suggest => {
+                  return suggest.trait === item.trait
+                })
+                if (!hasExist) {
+                  console.log('hasExist: ' + hasExist + ', item.trait: ' + item.trait)
                   $scope.suggests.push({ id: item.id, text: item.trait })
                 }
               })

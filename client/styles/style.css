@@ -1575,13 +1575,21 @@ textarea {
 }
 
 .phenotype-container .searchDiv {
-    width: 34em;
     margin: 2em auto 0 auto;
     height: 2.8em;
     white-space: nowrap;
 }
 
-.phenotype-container .searchDiv .input>input {
+.phenotype-container .searchDiv .input {
+    text-align: center;
+}
+
+.phenotype-container .searchDiv .input>div {
+    display: inline-block;
+    position: relative;
+}
+
+.phenotype-container .searchDiv .input input {
     height: 2.8em;
     width: 28em;
     background-color: white;
@@ -1591,7 +1599,7 @@ textarea {
     margin-bottom: 0px;
 }
 
-.phenotype-container .searchDiv .input>input[name="p-value"] {
+.phenotype-container .searchDiv .input input[name="p-value"] {
     width: 8em;
 }
 
@@ -1655,6 +1663,7 @@ textarea {
     background: #fff;
     z-index: 1000;
     position: absolute;
+    text-align: left;
 }
 
 .phenotype-container .search-suggest>ul>li {
