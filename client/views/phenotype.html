@@ -9,11 +9,11 @@
                 <input type="search" placeholder="输入你想要查询的trait" name="search" ng-model="sstr" ng-change="searchTrait()" />
                 <div class="search-suggest" ng-show="suggests.length > 0 && isShowSuggest">
                     <ul>
-                        <li ng-repeat="item in suggests" data-id="item.id" ng-click="showTrait(item.id, item.text)">{{item.text}}</li>
+                        <li ng-repeat="(index, item) in suggests" data-id="index" ng-click="showTrait(item)">{{item}}</li>
                     </ul>
                 </div>
             </div>
-            <button ng-click="searchTrait(suggests[0].id, suggests[0].text)">搜索</button>
+            <button ng-click="searchTrait(suggests[0])">搜索</button>
         </div>
     </div>
     <div class="result" ng-show="thisTrait.trait">

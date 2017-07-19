@@ -29,37 +29,60 @@ var ep01 = new eventproxy()
 var ep02 = new eventproxy()
 var ep03 = new eventproxy()
 
-ep01.all('readPathway', function (pathway) {
-  if (pathway === 'success') {
-    ep02.all('readSnpinfo', function (snpinfo) {
-      if (snpinfo === 'success') {
-        ep03.all('readGeneinfo', function (snpinfo) {
-          if (snpinfo === 'success') {
-            console.log('\n读取完毕！')
-            process.exit(0)
-          } else if (snpinfo === 'fail') {
-            console.log('读取并存储geneinfo失败！');
-          }
-        })
-        doRead(path.resolve(__dirname, file_config.geneinfo.url), 'gene_info.txt', 114078, function (str) {
-          ep03.emit('readGeneinfo', str)
-        });
-      } else if (snpinfo === 'fail') {
-        console.log('读取并存储snpinfo失败！');
-      }
-    })
-    doRead(path.resolve(__dirname, file_config.snpinfo.url), 'snp_info.txt', file_config.snpinfo.total_lines, function (str) {
-      ep02.emit('readSnpinfo', str)
-    });
-  } else if (pathway === 'fail') {
-    console.log('读取并存储pathway失败！');
-  }
-})
+// ep01.all('readPathway', function (pathway) {
+//   if (pathway === 'success') {
+//     ep02.all('readSnpinfo', function (snpinfo) {
+//       if (snpinfo === 'success') {
+//         // ep03.all('readGeneinfo', function (snpinfo) {
+//         //   if (snpinfo === 'success') {
+//         //     console.log('\n读取完毕！')
+//         //     process.exit(0)
+//         //   } else if (snpinfo === 'fail') {
+//         //     console.log('读取并存储geneinfo失败！');
+//         //   }
+//         // })
+//         // doRead(path.resolve(__dirname, file_config.geneinfo.url), 'gene_info.txt', 114078, function (str) {
+//         //   ep03.emit('readGeneinfo', str)
+//         // });
+//       } else if (snpinfo === 'fail') {
+//         console.log('读取并存储snpinfo失败！');
+//       }
+//     })
+//     doRead(path.resolve(__dirname, file_config.snpinfo.url), 'snp_info.txt', file_config.snpinfo.total_lines, function (str) {
+//       ep02.emit('readSnpinfo', str)
+//     });
+//   } else if (pathway === 'fail') {
+//     console.log('读取并存储pathway失败！');
+//   }
+// })
 // doRead(path.resolve(__dirname, file_config.geneinfo.url), 'gene_info.txt', 114078);
-doRead(path.resolve(__dirname, file_config.pathway.url), 'pathway.txt', file_config.pathway.total_lines, function (str) {
-  ep01.emit('readPathway', str)
-});
+// doRead(path.resolve(__dirname, file_config.pathway.url), 'pathway.txt', file_config.pathway.total_lines, function (str) {
+//   ep01.emit('readPathway', str)
+// });
 
+/**
+ * 将科学计数法转出成浮点数
+ * @param str 传入科学计数法表示数字的字符串
+ */
+function convertFloat(str) {
+  let regExp = new RegExp('^\d+[Ee]{1}(-)*\d+$', 'ig');
+  let result = regExp.exec(str);
+  let resultValue = "";
+  let power = "";
+  if (result != null) {
+    resultValue = result[2];
+    power = result[3];
+    result = regExp.exec(str);
+  }
+  if (resultValue != "") {
+    if (power != "") {
+      var powVer = Math.pow(10, power);
+      resultValue = resultValue * powVer;
+    }
+  }
+  return resultValue
+}
+convertFloat('123e-3')
 
 /** 
  * 执行读取文件的函数
@@ -146,7 +169,7 @@ function doRead(url, filename, total, callback) {
               }
             }
           } else {
-            pb.interrupt('第 ' + pb.curr + '行的gene_info ' + obj.id + ' 读取失败, 错误原因: ' + obj.msg)
+            pb.interrupt('第 ' + pb.curr + ' 行的snp_info ' + obj.id + ' 读取失败, 错误原因: ' + obj.msg)
           }
         })
       } else if (filename === 'gene_info.txt') {

@@ -89,31 +89,31 @@ angular
       $scope.isShowSuggest = false
       $scope.searchTrait = function () {
         $scope.isShowSuggest = true
-        Snp_info.find({ filter: { where: { trait: { like: "%" + $scope.sstr + "%" } }, fields: { trait: true, id: true } } })
+        Snp_info.find({ filter: { where: { trait: { like: "%" + $scope.sstr + "%" } }, fields: { trait: true } } })
           .$promise
           .then(function (res) {
             if (res instanceof Array) {
               res.forEach(item => {
                 // 判断item.trait是不是在suggests中存在，不存在则添加
                 let hasExist = $scope.suggests.some(suggest => {
-                  return suggest.trait === item.trait
+                  return suggest === item.trait
                 })
                 if (!hasExist) {
-                  console.log('hasExist: ' + hasExist + ', item.trait: ' + item.trait)
-                  $scope.suggests.push({ id: item.id, text: item.trait })
+                  console.log(item.trait)
+                  $scope.suggests.push(item.trait)
                 }
               })
             }
           })
       };
-      $scope.showTrait = function (id, trait) {
+      $scope.showTrait = function (trait) {
         $scope.sstr = trait
-        Snp_info.find({ filter: { where: { id: id } } })
+        Snp_info.find({ filter: { where: { trait: trait, p: { gte: $scope.pValue } } } })
           .$promise
           .then(function (res) {
             $scope.isShowSuggest = false
             $scope.isShowTable = true
-            $scope.thisTrait = res[0]
+            console.log(res);
           })
       };
     }]);

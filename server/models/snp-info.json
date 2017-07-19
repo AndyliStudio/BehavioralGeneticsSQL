@@ -25,7 +25,10 @@
       "type": "string"
     },
     "p": {
-      "type": "string"
+      "type": "number",
+      "dataType": "float",
+      "precision": 30,
+      "scale": 28
     },
     "add_effect": {
       "type": "string"

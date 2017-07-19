@@ -32,7 +32,6 @@ module.exports = function (Snpinfo) {
   )
 
   Snpinfo.searchTrait = function (sstr, cb) {//定义一个http接口方法
-    console.log(app)
     Snpinfo.find({ where: { marker: new RegExp(sstr, 'igm') }, fields: { marker: true, id: true } })
       .then(function (res) {
         if (res instanceof Array) {
