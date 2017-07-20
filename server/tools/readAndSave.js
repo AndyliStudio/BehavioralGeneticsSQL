@@ -66,21 +66,13 @@ var ep03 = new eventproxy()
  */
 function convertFloat(str) {
   let regExp = new RegExp('^\d+[Ee]{1}(-)*\d+$', 'ig');
-  let result = regExp.exec(str);
-  let resultValue = "";
-  let power = "";
-  if (result != null) {
-    resultValue = result[2];
-    power = result[3];
-    result = regExp.exec(str);
+  if (regExp.test(str)) {
+    let num = substring(0, str.indexOf('e') || str.indexOf('E'))
+    let exc = parseInt(substring(str.indexOf('e') || str.indexOf('E')))
+
+  } else {
+    console.log('你传入的字符串不是科学计数法形式')
   }
-  if (resultValue != "") {
-    if (power != "") {
-      var powVer = Math.pow(10, power);
-      resultValue = resultValue * powVer;
-    }
-  }
-  return resultValue
 }
 convertFloat('123e-3')
 
