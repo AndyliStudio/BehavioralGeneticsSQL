@@ -1433,6 +1433,8 @@ textarea {
 .container .dropdown .dropdown-menu {
     background: #fff;
     margin-top: 1.4em !important;
+    border: 1px solid #ccc;
+    border-top: 0;
 }
 
 .container .dropdown-menu>li>a:focus,
@@ -1684,6 +1686,14 @@ textarea {
 
 .phenotype-container .result>p {
     padding-left: 0;
+}
+
+.phenotype-container .text-right {
+    text-align: right;
+}
+
+.phenotype-container .line-height {
+    vertical-align: center;
 }
 
 

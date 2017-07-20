@@ -34,7 +34,7 @@ node .
 ### 1. 如何设置loopback接口支持跨域
 参考教程  http://loopback.io/doc/en/lb2/Security-considerations.html#deprecation-of-built-in-cors-middleware
 ### 2. 数据第一行描述信息记得加一个#在前面
-因为第一行默认被作为描述行
+因为第一行默认被作为描述行，另外snp_info表的residual_var和p值需要使用科学计数法的形式。
 ### 3. 执行插入数据之前记得使用createTable将数据清空
 请先执行数据库初始化js，在执行自动导入数据的js
 ```

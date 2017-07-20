@@ -27,7 +27,7 @@
     "p": {
       "type": "number",
       "dataType": "float",
-      "precision": 30,
+      "precision": 50,
       "scale": 28
     },
     "add_effect": {

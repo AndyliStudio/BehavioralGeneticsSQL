@@ -19,6 +19,8 @@ angular
             var next = $location.nextAfterLogin || '/main';
             $location.nextAfterLogin = null;
             $location.path(next);
+          }).catch(function (err) {
+            alert('用户名或者密码错误');
           });
       };
     }])
@@ -82,11 +84,25 @@ angular
   .controller('PhenotypeController', ['$scope', 'Snp_info', '$state',
     function ($scope, Snp_info, $state) {
       $scope.sstr = ''
-      $scope.pValue = ''
+      $scope.pValue = '0.00000008942450418520821'
       $scope.suggests = []
-      $scope.thisTrait = {}
+      $scope.allSnps = []
+      $scope.showingSnps = []
       $scope.isShowTable = false
       $scope.isShowSuggest = false
+      $scope.currentPage = 0
+      $scope.totalItems = 0
+      $scope.isSelectAll = false
+      $scope.convertFloat = function (str) {
+        let regExp = /^\d+(\.)*\d+[Ee]{1}(-)*\d+$/ig
+        if (regExp.test(str)) {
+          let num = parseFloat(str.substring(0, str.indexOf('e') > -1 ? str.indexOf('e') : (str.indexOf('E') > -1 ? str.indexOf('E') : 0)))
+          let exc = parseInt(str.substring((str.indexOf('e') > -1 ? str.indexOf('e') : (str.indexOf('E') > -1 ? str.indexOf('E') : 0)) + 1))
+          return num * Math.pow(10, exc)
+        } else {
+          return parseFloat(str)
+        }
+      }
       $scope.searchTrait = function () {
         $scope.isShowSuggest = true
         Snp_info.find({ filter: { where: { trait: { like: "%" + $scope.sstr + "%" } }, fields: { trait: true } } })
@@ -99,21 +115,28 @@ angular
                   return suggest === item.trait
                 })
                 if (!hasExist) {
-                  console.log(item.trait)
                   $scope.suggests.push(item.trait)
                 }
               })
             }
           })
-      };
+      }
       $scope.showTrait = function (trait) {
         $scope.sstr = trait
-        Snp_info.find({ filter: { where: { trait: trait, p: { gte: $scope.pValue } } } })
+        Snp_info.find({ filter: { where: { trait: trait, p: { gte: $scope.convertFloat($scope.pValue.toString()) } } } })
           .$promise
           .then(function (res) {
             $scope.isShowSuggest = false
             $scope.isShowTable = true
-            console.log(res);
+            $scope.totalItems = res.length || 0
+            $scope.showingSnps = res.splice(0, 10)
+            $scope.allSnps = res.map(item => {
+              item.isChecked = false
+              return item;
+            })
           })
-      };
+      }
+      $scope.pageChanged = function () {
+        $scope.showingSnps = $scope.allSnps.splice($scope.currentPage * 10, 10)
+      }
     }]);

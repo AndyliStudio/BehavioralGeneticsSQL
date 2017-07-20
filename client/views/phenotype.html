@@ -4,7 +4,7 @@
         <div class="input">
             <!-- <select ng-init="selectedName = pValueArr[0]" ng-model="pValue" ng-options="x for x in pValueArr"></select> -->
             <span>阀值p</span>
-            <input type="number" placeholder="输入阀值" name="p-value" ng-model="pValue" />
+            <input type="text" placeholder="输入阀值" name="p-value" ng-model="pValue" />
             <div>
                 <input type="search" placeholder="输入你想要查询的trait" name="search" ng-model="sstr" ng-change="searchTrait()" />
                 <div class="search-suggest" ng-show="suggests.length > 0 && isShowSuggest">
@@ -16,54 +16,30 @@
             <button ng-click="searchTrait(suggests[0])">搜索</button>
         </div>
     </div>
-    <div class="result" ng-show="thisTrait.trait">
+    <div class="result" ng-show="isShowTable">
         <p>查询得到的信息如下：</p>
-        <table class="table table-bordered">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="line-height"><input type="checkbox" ng-model="isSelectAll" /></th>
+                    <th>trait</th>
+                    <th>marker</th>
+                    <th>p</th>
+                </tr>
+            </thead>
             <tbody>
-                <tr>
-                    <td>marker</td>
-                    <td>{{thisTrait.marker}}</td>
-                    <td>id</td>
-                    <td>{{thisTrait.id}}</td>
-                </tr>
-                <tr>
-                    <td>trait</td>
-                    <td>{{thisTrait.trait}}</td>
-                    <td>chr</td>
-                    <td>{{thisTrait.chr}}</td>
-                </tr>
-                <tr>
-                    <td>pos</td>
-                    <td>{{thisTrait.pos}}</td>
-                    <td>df</td>
-                    <td>{{thisTrait.df}}</td>
-                </tr>
-                <tr>
-                    <td>F</td>
-                    <td>{{thisTrait.F}}</td>
-                    <td>p</td>
-                    <td>{{thisTrait.p}}</td>
-                </tr>
-                <tr>
-                    <td>add_effect</td>
-                    <td>{{thisTrait.add_effect}}</td>
-                    <td>dom_f</td>
-                    <td>{{thisTrait.dom_f}}</td>
-                </tr>
-                <tr>
-                    <td>dom_p</td>
-                    <td>{{thisTrait.dom_p}}</td>
-                    <td>errordf</td>
-                    <td>{{thisTrait.errordf}}</td>
-                </tr>
-                <tr>
-                    <td>markerR2</td>
-                    <td>{{thisTrait.markerR2}}</td>
-                    <td>genetic_var</td>
-                    <td>{{thisTrait.genetic_var}}</td>
+                <tr ng-repeat="(index, item) in showingSnps track by $index">
+                    <td class="line-height"><input type="checkbox" ng-checked="item.isChecked || isSelectAll" /></td>
+                    <td>{{ item.trait }}</td>
+                    <td>{{ item.marker }}</td>
+                    <td>{{ item.p }}</td>
                 </tr>
             </tbody>
         </table>
+        <div class="text-right">
+            <ul uib-pagination total-items="totalItems" first-text="首页" last-text="最后一页" previous-text="上一页" next-text="下一页" ng-model="currentPage"
+                max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" ng-change="pageChanged()"></ul>
+        </div>
         <p class="param-des">
             参数注释如下：&nbsp;marker: 基因标识，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述
         </p>

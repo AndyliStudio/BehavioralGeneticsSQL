@@ -29,52 +29,50 @@ var ep01 = new eventproxy()
 var ep02 = new eventproxy()
 var ep03 = new eventproxy()
 
-// ep01.all('readPathway', function (pathway) {
-//   if (pathway === 'success') {
-//     ep02.all('readSnpinfo', function (snpinfo) {
-//       if (snpinfo === 'success') {
-//         // ep03.all('readGeneinfo', function (snpinfo) {
-//         //   if (snpinfo === 'success') {
-//         //     console.log('\n读取完毕！')
-//         //     process.exit(0)
-//         //   } else if (snpinfo === 'fail') {
-//         //     console.log('读取并存储geneinfo失败！');
-//         //   }
-//         // })
-//         // doRead(path.resolve(__dirname, file_config.geneinfo.url), 'gene_info.txt', 114078, function (str) {
-//         //   ep03.emit('readGeneinfo', str)
-//         // });
-//       } else if (snpinfo === 'fail') {
-//         console.log('读取并存储snpinfo失败！');
-//       }
-//     })
-//     doRead(path.resolve(__dirname, file_config.snpinfo.url), 'snp_info.txt', file_config.snpinfo.total_lines, function (str) {
-//       ep02.emit('readSnpinfo', str)
-//     });
-//   } else if (pathway === 'fail') {
-//     console.log('读取并存储pathway失败！');
-//   }
-// })
-// doRead(path.resolve(__dirname, file_config.geneinfo.url), 'gene_info.txt', 114078);
-// doRead(path.resolve(__dirname, file_config.pathway.url), 'pathway.txt', file_config.pathway.total_lines, function (str) {
-//   ep01.emit('readPathway', str)
-// });
+ep01.all('readPathway', function (pathway) {
+  if (pathway === 'success') {
+    ep02.all('readSnpinfo', function (snpinfo) {
+      if (snpinfo === 'success') {
+        // ep03.all('readGeneinfo', function (snpinfo) {
+        //   if (snpinfo === 'success') {
+        //     console.log('\n读取完毕！')
+        //     process.exit(0)
+        //   } else if (snpinfo === 'fail') {
+        //     console.log('读取并存储geneinfo失败！');
+        //   }
+        // })
+        // doRead(path.resolve(__dirname, file_config.geneinfo.url), 'gene_info.txt', 114078, function (str) {
+        //   ep03.emit('readGeneinfo', str)
+        // });
+      } else if (snpinfo === 'fail') {
+        console.log('读取并存储snpinfo失败！');
+      }
+    })
+    doRead(path.resolve(__dirname, file_config.snpinfo.url), 'snp_info.txt', file_config.snpinfo.total_lines, function (str) {
+      ep02.emit('readSnpinfo', str)
+    });
+  } else if (pathway === 'fail') {
+    console.log('读取并存储pathway失败！');
+  }
+})
+doRead(path.resolve(__dirname, file_config.pathway.url), 'pathway.txt', file_config.pathway.total_lines, function (str) {
+  ep01.emit('readPathway', str)
+});
 
 /**
  * 将科学计数法转出成浮点数
  * @param str 传入科学计数法表示数字的字符串
  */
 function convertFloat(str) {
-  let regExp = new RegExp('^\d+[Ee]{1}(-)*\d+$', 'ig');
+  let regExp = /^\d+(\.)*\d+[Ee]{1}(-)*\d+$/ig
   if (regExp.test(str)) {
-    let num = substring(0, str.indexOf('e') || str.indexOf('E'))
-    let exc = parseInt(substring(str.indexOf('e') || str.indexOf('E')))
-
+    let num = parseFloat(str.substring(0, str.indexOf('e') > -1 ? str.indexOf('e') : (str.indexOf('E') > -1 ? str.indexOf('E') : 0)))
+    let exc = parseInt(str.substring((str.indexOf('e') > -1 ? str.indexOf('e') : (str.indexOf('E') > -1 ? str.indexOf('E') : 0)) + 1))
+    return num * Math.pow(10, exc)
   } else {
-    console.log('你传入的字符串不是科学计数法形式')
+    return parseFloat(str)
   }
 }
-convertFloat('123e-3')
 
 /** 
  * 执行读取文件的函数
@@ -136,7 +134,7 @@ function doRead(url, filename, total, callback) {
         finalData02.pos = parseInt(byteArr[3])
         finalData02.df = parseInt(byteArr[4])
         finalData02.F = byteArr[5]
-        finalData02.p = byteArr[6]
+        finalData02.p = convertFloat(byteArr[6])
         finalData02.add_effect = byteArr[7]
         finalData02.add_f = byteArr[8]
         finalData02.add_p = byteArr[9]
@@ -146,7 +144,7 @@ function doRead(url, filename, total, callback) {
         finalData02.errordf = byteArr[13]
         finalData02.markerR2 = byteArr[14]
         finalData02.genetic_var = byteArr[15]
-        finalData02.residual_var = byteArr[16]
+        finalData02.residual_var = convertFloat(byteArr[16])
         finalData02.LnLikelihood = byteArr[17]
         doSave('snp_info', finalData02, function (obj) {
           if (!obj) {
