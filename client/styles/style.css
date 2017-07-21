@@ -1696,6 +1696,15 @@ textarea {
     vertical-align: center;
 }
 
+.phenotype-container .download {
+    text-decoration: underline;
+    color: #337ab7;
+}
+
+.phenotype-container .download>img {
+    height: 20px;
+}
+
 
 /* 关于表格的部分样式 */
 

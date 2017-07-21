@@ -81,8 +81,8 @@ angular
           })
       };
     }])
-  .controller('PhenotypeController', ['$scope', 'Snp_info', '$state',
-    function ($scope, Snp_info, $state) {
+  .controller('PhenotypeController', ['$scope', 'Snp_info', '$state', '$http',
+    function ($scope, Snp_info, $state, $http) {
       $scope.sstr = ''
       $scope.pValue = '0.00000008942450418520821'
       $scope.suggests = []
@@ -93,6 +93,8 @@ angular
       $scope.currentPage = 0
       $scope.totalItems = 0
       $scope.isSelectAll = false
+      $scope.selectIds = []
+      $scope.download_fail_text = ''
       $scope.convertFloat = function (str) {
         let regExp = /^\d+(\.)*\d+[Ee]{1}(-)*\d+$/ig
         if (regExp.test(str)) {
@@ -129,7 +131,10 @@ angular
             $scope.isShowSuggest = false
             $scope.isShowTable = true
             $scope.totalItems = res.length || 0
-            $scope.showingSnps = res.splice(0, 10)
+            $scope.showingSnps = res.splice(0, 10).map(item => {
+              item.isChecked = false
+              return item;
+            })
             $scope.allSnps = res.map(item => {
               item.isChecked = false
               return item;
@@ -138,5 +143,49 @@ angular
       }
       $scope.pageChanged = function () {
         $scope.showingSnps = $scope.allSnps.splice($scope.currentPage * 10, 10)
+      }
+      $scope.itemSelected = function (select, id) {
+        let isExist = $scope.selectIds.some(item => {
+          return item === id
+        })
+        if (select) {
+          if (!isExist) {
+            $scope.selectIds.push(id)
+          }
+        } else {
+          if (!isExist) {
+            $scope.selectIds.splice($scope.selectIds.indexOf(id), 1)
+          }
+        }
+      }
+      $scope.selectAll = function () {
+        $scope.selectIds = []
+        if ($scope.isSelectAll) {
+          $scope.allSnps.forEach(item => {
+            item.isChecked = true
+            $scope.selectIds.push(item.id)
+          })
+        } else {
+          $scope.allSnps.forEach(item => {
+            item.isChecked = false
+          })
+        }
+        $scope.showingSnps = $scope.allSnps.splice($scope.currentPage * 10, 10)
+      }
+      $scope.download = function () {
+        // 获取所有选中的snpinfo的id
+        $http({
+          method: 'post',
+          url: '/api/snp_infos/downloadSnp',
+          data: { ids: $scope.selectIds }
+        }).then(function successCallback(response) {
+          if (response.data.result.errno === 0) {
+            window.open(response.data.result.download_url)
+          } else {
+            $scope.download_fail_text = '下载失败，' + response.data.result.message
+          }
+        }, function errorCallback(error) {
+          $scope.download_fail_text = '下载失败，' + error.toString()
+        });
       }
     }]);

@@ -21,7 +21,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th class="line-height"><input type="checkbox" ng-model="isSelectAll" /></th>
+                    <th class="line-height"><input type="checkbox" ng-model="isSelectAll" ng-change="selectAll()" /></th>
                     <th>trait</th>
                     <th>marker</th>
                     <th>p</th>
@@ -29,7 +29,8 @@
             </thead>
             <tbody>
                 <tr ng-repeat="(index, item) in showingSnps track by $index">
-                    <td class="line-height"><input type="checkbox" ng-checked="item.isChecked || isSelectAll" /></td>
+                    <td class="line-height"><input type="checkbox" ng-model="item.isChecked" ng-selected="item.isChecked || isSelectAll" ng-change="itemSelected(item.isChecked, item.id)"
+                        /></td>
                     <td>{{ item.trait }}</td>
                     <td>{{ item.marker }}</td>
                     <td>{{ item.p }}</td>
@@ -40,6 +41,7 @@
             <ul uib-pagination total-items="totalItems" first-text="首页" last-text="最后一页" previous-text="上一页" next-text="下一页" ng-model="currentPage"
                 max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" ng-change="pageChanged()"></ul>
         </div>
+        <p class="download" ng-click="download()"><img src="../images/download.png" alt="">下载选中数据</p>
         <p class="param-des">
             参数注释如下：&nbsp;marker: 基因标识，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述
         </p>

@@ -33,17 +33,17 @@ ep01.all('readPathway', function (pathway) {
   if (pathway === 'success') {
     ep02.all('readSnpinfo', function (snpinfo) {
       if (snpinfo === 'success') {
-        // ep03.all('readGeneinfo', function (snpinfo) {
-        //   if (snpinfo === 'success') {
-        //     console.log('\n读取完毕！')
-        //     process.exit(0)
-        //   } else if (snpinfo === 'fail') {
-        //     console.log('读取并存储geneinfo失败！');
-        //   }
-        // })
-        // doRead(path.resolve(__dirname, file_config.geneinfo.url), 'gene_info.txt', 114078, function (str) {
-        //   ep03.emit('readGeneinfo', str)
-        // });
+        ep03.all('readGeneinfo', function (snpinfo) {
+          if (snpinfo === 'success') {
+            console.log('\n读取完毕！')
+            process.exit(0)
+          } else if (snpinfo === 'fail') {
+            console.log('读取并存储geneinfo失败！');
+          }
+        })
+        doRead(path.resolve(__dirname, file_config.geneinfo.url), 'gene_info.txt', 114078, function (str) {
+          ep03.emit('readGeneinfo', str)
+        });
       } else if (snpinfo === 'fail') {
         console.log('读取并存储snpinfo失败！');
       }
