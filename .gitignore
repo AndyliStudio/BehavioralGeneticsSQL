@@ -2,6 +2,7 @@ node_modules
 coverage
 client/bower_components
 dist
+server/download
 
 *.csv
 *.dat
