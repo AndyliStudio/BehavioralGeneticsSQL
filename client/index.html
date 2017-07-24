@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="styles/owl.carousel.css">
   <link rel="stylesheet" href="styles/responsive.css">
   <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
   <!-- endbuild -->
 </head>
 
@@ -39,7 +40,7 @@
                   <li><a class="scroll" href="#help">使用帮助</a></li>
                   <li><a class="scroll" href="#team">团队</a></li>
                   <li><a class="scroll" href="#blog">官方博客</a></li>
-                  <li><a class="scroll" href="#contact">联系我们</a></li>
+                  <li><a class="scroll" ui-sref="contact-us">联系我们</a></li>
                   <li>
                     <button type="button" class="btn btn-default navbar-btn" ui-sref="login" ng-hide="currentUser">登陆</button>
                     <span class="or" ng-hide="currentUser">or</span>
@@ -95,6 +96,7 @@
   <script src="vendor/angular-ui-router.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script src="bower_components/angular-amap/angular-amap.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/services/lb-services.js"></script>
   <script src="js/controllers/auth.js"></script>

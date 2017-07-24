@@ -50,28 +50,6 @@ angular
     });
     // 声明路由
     $stateProvider
-      .state('add-review', {
-        url: '/add-review',
-        templateUrl: 'views/review-form.html',
-        controller: 'AddReviewController',
-        authenticate: true
-      })
-      .state('all-reviews', {
-        url: '/all-reviews',
-        templateUrl: 'views/all-reviews.html',
-        controller: 'AllReviewsController'
-      })
-      .state('edit-review', {
-        url: '/edit-review/:id',
-        templateUrl: 'views/review-form.html',
-        controller: 'EditReviewController',
-        authenticate: true
-      })
-      .state('delete-review', {
-        url: '/delete-review/:id',
-        controller: 'DeleteReviewController',
-        authenticate: true
-      })
       .state('forbidden', {
         url: '/forbidden',
         templateUrl: 'views/forbidden.html',
@@ -89,10 +67,6 @@ angular
         url: '/sign-up',
         templateUrl: 'views/sign-up-form.html',
         controller: 'SignUpController',
-      })
-      .state('sign-up-success', {
-        url: '/sign-up/success',
-        templateUrl: 'views/sign-up-success.html'
       })
       .state('main', {
         url: '/main',
@@ -117,10 +91,11 @@ angular
         url: '/pathway',
         templateUrl: 'views/pathway.html'
       })
-      .state('browser', {
-        url: '/browser',
-        templateUrl: 'views/browser.html'
-      });
+      .state('contact-us', {
+        url: '/contact',
+        templateUrl: 'views/countact-us.html',
+        controller: 'ContactUsController'
+      })
     $urlRouterProvider.otherwise('main');
   }])
   .run(['$rootScope', '$state', 'AuthService', function ($rootScope, $state, AuthService) {

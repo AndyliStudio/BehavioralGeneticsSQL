@@ -188,4 +188,23 @@ angular
           $scope.download_fail_text = '下载失败，' + error.toString()
         });
       }
+    }])
+  .controller('ContactUsController', ['$scope', '$state', '$location', '$http',
+    function ($scope, $state, $location, $http) {
+      $scope.user = {
+        email: 'andyliwr@outlook.com',
+        password: '123456'
+      };
+
+      $scope.login = function () {
+        AuthService.login($scope.user.email, $scope.user.password)
+          .then(function () {
+            // $state.go('main');
+            var next = $location.nextAfterLogin || '/main';
+            $location.nextAfterLogin = null;
+            $location.path(next);
+          }).catch(function (err) {
+            alert('用户名或者密码错误');
+          });
+      };
     }]);
