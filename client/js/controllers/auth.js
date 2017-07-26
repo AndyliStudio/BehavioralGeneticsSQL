@@ -239,12 +239,29 @@ angular
   ])
   .controller('ContactUsController', ContactUsController);
 
-ContactUsController.$inject = ['NgMap'];
+ContactUsController.$inject = ['$rootScope', '$scope', 'NgMap'];
 
-function ContactUsController(NgMap) {
-  var ctrl = this;
-
+function ContactUsController($rootScope, $scope, NgMap) {
   NgMap.getMap().then(function (map) {
-    ctrl.map = map;
+    $scope.map = map;
   });
+  $scope.clicked = function () {
+    alert('Clicked a link inside infoWindow');
+  };
+
+  $scope.shops = [{
+    id: 'foo',
+    name: 'FOO SHOP',
+    position: [29.820065, 106.424587]
+  }];
+  $scope.shop = $scope.shops[0];
+
+  $scope.showDetail = function (e, shop) {
+    $scope.shop = shop;
+    $scope.map.showInfoWindow('foo-iw', shop.id);
+  };
+
+  $scope.hideDetail = function () {
+    $scope.map.hideInfoWindow('foo-iw');
+  };
 }
