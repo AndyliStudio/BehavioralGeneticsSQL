@@ -3,10 +3,18 @@
     <marker id='{{shop.id}}' position="{{shop.position}}" ng-repeat="shop in shops" on-click="showDetail(shop)">
     </marker>
     <info-window id="foo-iw">
-      <div ng-non-bindable="">
-        id: {{shop.id}}<br/> name: {{shop.name}}<br/> Position 1: {{shop.position}}<br/> Position 2: {{anchor.getPosition()}}<br/>        Position 3: {{map.markers[shop.id].getPosition()}}<br/>
-        <a href="#" ng-click="clicked()">Click Here</a>
+      <div class="info-windows">
+        <p class="title">{{shop.id}}</p>
+        <p class="address">{{shop.address}}</p>
+        <p class="englipostnumsh_addr">{{shop.english_addr}}</p>
+        <p class="postnum">邮编：{{shop.postnum}}</p>
+        <p class="detail" ng-click="clicked()">在Google地图上查看</p>
       </div>
     </info-window>
   </ng-map>
+  <div class="contact-way">
+    <img src="../images/email.png" alt="通过email联系我们" onclick="window.open('mailto:andyliwr@outlook.com')" ／>
+    <img src="../images/github.png" alt="在github上提issue" onclick="window.open('https://github.com/AndyliStudio/BehavioralGeneticsSQL/issues')"
+      ／>
+  </div>
 </div>

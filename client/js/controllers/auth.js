@@ -62,18 +62,18 @@ angular
       $scope.searchMarker = function () {
         $scope.isShowSuggest = true
         Snp_info.find({
-            filter: {
-              where: {
-                marker: {
-                  like: "%" + $scope.sstr + "%"
-                }
-              },
-              fields: {
-                marker: true,
-                id: true
+          filter: {
+            where: {
+              marker: {
+                like: "%" + $scope.sstr + "%"
               }
+            },
+            fields: {
+              marker: true,
+              id: true
             }
-          })
+          }
+        })
           .$promise
           .then(function (res) {
             if (res instanceof Array) {
@@ -91,12 +91,12 @@ angular
       $scope.showMarker = function (id, marker) {
         $scope.sstr = marker
         Snp_info.find({
-            filter: {
-              where: {
-                id: id
-              }
+          filter: {
+            where: {
+              id: id
             }
-          })
+          }
+        })
           .$promise
           .then(function (res) {
             $scope.isShowSuggest = false
@@ -133,17 +133,17 @@ angular
       $scope.searchTrait = function () {
         $scope.isShowSuggest = true
         Snp_info.find({
-            filter: {
-              where: {
-                trait: {
-                  like: "%" + $scope.sstr + "%"
-                }
-              },
-              fields: {
-                trait: true
+          filter: {
+            where: {
+              trait: {
+                like: "%" + $scope.sstr + "%"
               }
+            },
+            fields: {
+              trait: true
             }
-          })
+          }
+        })
           .$promise
           .then(function (res) {
             if (res instanceof Array) {
@@ -162,15 +162,15 @@ angular
       $scope.showTrait = function (trait) {
         $scope.sstr = trait
         Snp_info.find({
-            filter: {
-              where: {
-                trait: trait,
-                p: {
-                  gte: $scope.convertFloat($scope.pValue.toString())
-                }
+          filter: {
+            where: {
+              trait: trait,
+              p: {
+                gte: $scope.convertFloat($scope.pValue.toString())
               }
             }
-          })
+          }
+        })
           .$promise
           .then(function (res) {
             $scope.isShowSuggest = false
@@ -242,26 +242,31 @@ angular
 ContactUsController.$inject = ['$rootScope', '$scope', 'NgMap'];
 
 function ContactUsController($rootScope, $scope, NgMap) {
+  $scope.isShowWindowInfo = false
   NgMap.getMap().then(function (map) {
     $scope.map = map;
-  });
+  })
   $scope.clicked = function () {
-    alert('Clicked a link inside infoWindow');
-  };
+    window.open('https://goo.gl/maps/LYLtGWPo1ED2')
+  }
 
   $scope.shops = [{
-    id: 'foo',
-    name: 'FOO SHOP',
+    id: '西南大学（SourthWest University）',
+    address: '中国重庆市北碚区天生丽街西南大学25教学楼',
+    english_addr: 'Chian Chongqing Beibei Tiansheng SourthWest University',
+    postnum: '400715',
+    tel: '18883339779',
     position: [29.820065, 106.424587]
-  }];
-  $scope.shop = $scope.shops[0];
+  }]
+  $scope.shop = $scope.shops[0]
 
   $scope.showDetail = function (e, shop) {
-    $scope.shop = shop;
-    $scope.map.showInfoWindow('foo-iw', shop.id);
-  };
-
-  $scope.hideDetail = function () {
-    $scope.map.hideInfoWindow('foo-iw');
-  };
+    if ($scope.isShowWindowInfo) {
+      $scope.map.hideInfoWindow('foo-iw');
+    } else {
+      $scope.shop = shop;
+      $scope.map.showInfoWindow('foo-iw', shop.id);
+    }
+    $scope.isShowWindowInfo = !$scope.isShowWindowInfo
+  }
 }
