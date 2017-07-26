@@ -23,14 +23,16 @@ angular
             alert('用户名或者密码错误');
           });
       };
-    }])
+    }
+  ])
   .controller('AuthLogoutController', ['$scope', 'AuthService', '$state',
     function ($scope, AuthService, $state) {
       AuthService.logout()
         .then(function () {
           $state.go('all-reviews');
         });
-    }])
+    }
+  ])
   .controller('SignUpController', ['$scope', 'AuthService', '$state',
     function ($scope, AuthService, $state) {
       $scope.user = {
@@ -48,7 +50,8 @@ angular
             $state.transitionTo('sign-up-success');
           });
       };
-    }])
+    }
+  ])
   .controller('MarkerController', ['$scope', 'Snp_info', '$state',
     function ($scope, Snp_info, $state) {
       $scope.sstr = ''
@@ -58,13 +61,28 @@ angular
       $scope.isShowSuggest = false
       $scope.searchMarker = function () {
         $scope.isShowSuggest = true
-        Snp_info.find({ filter: { where: { marker: { like: "%" + $scope.sstr + "%" } }, fields: { marker: true, id: true } } })
+        Snp_info.find({
+            filter: {
+              where: {
+                marker: {
+                  like: "%" + $scope.sstr + "%"
+                }
+              },
+              fields: {
+                marker: true,
+                id: true
+              }
+            }
+          })
           .$promise
           .then(function (res) {
             if (res instanceof Array) {
               res.forEach(item => {
                 if ($scope.suggests.length < 10) {
-                  $scope.suggests.push({ id: item.id, text: item.marker })
+                  $scope.suggests.push({
+                    id: item.id,
+                    text: item.marker
+                  })
                 }
               })
             }
@@ -72,7 +90,13 @@ angular
       };
       $scope.showMarker = function (id, marker) {
         $scope.sstr = marker
-        Snp_info.find({ filter: { where: { id: id } } })
+        Snp_info.find({
+            filter: {
+              where: {
+                id: id
+              }
+            }
+          })
           .$promise
           .then(function (res) {
             $scope.isShowSuggest = false
@@ -80,7 +104,8 @@ angular
             $scope.thisMarker = res[0]
           })
       };
-    }])
+    }
+  ])
   .controller('PhenotypeController', ['$scope', 'Snp_info', '$state', '$http',
     function ($scope, Snp_info, $state, $http) {
       $scope.sstr = ''
@@ -107,7 +132,18 @@ angular
       }
       $scope.searchTrait = function () {
         $scope.isShowSuggest = true
-        Snp_info.find({ filter: { where: { trait: { like: "%" + $scope.sstr + "%" } }, fields: { trait: true } } })
+        Snp_info.find({
+            filter: {
+              where: {
+                trait: {
+                  like: "%" + $scope.sstr + "%"
+                }
+              },
+              fields: {
+                trait: true
+              }
+            }
+          })
           .$promise
           .then(function (res) {
             if (res instanceof Array) {
@@ -125,7 +161,16 @@ angular
       }
       $scope.showTrait = function (trait) {
         $scope.sstr = trait
-        Snp_info.find({ filter: { where: { trait: trait, p: { gte: $scope.convertFloat($scope.pValue.toString()) } } } })
+        Snp_info.find({
+            filter: {
+              where: {
+                trait: trait,
+                p: {
+                  gte: $scope.convertFloat($scope.pValue.toString())
+                }
+              }
+            }
+          })
           .$promise
           .then(function (res) {
             $scope.isShowSuggest = false
@@ -177,7 +222,9 @@ angular
         $http({
           method: 'post',
           url: '/api/snp_infos/downloadSnp',
-          data: { ids: $scope.selectIds }
+          data: {
+            ids: $scope.selectIds
+          }
         }).then(function successCallback(response) {
           if (response.data.result.errno === 0) {
             window.open(response.data.result.download_url)
@@ -188,23 +235,16 @@ angular
           $scope.download_fail_text = '下载失败，' + error.toString()
         });
       }
-    }])
-  .controller('ContactUsController', ['$scope', '$state', '$location', '$http',
-    function ($scope, $state, $location, $http) {
-      $scope.user = {
-        email: 'andyliwr@outlook.com',
-        password: '123456'
-      };
+    }
+  ])
+  .controller('ContactUsController', ContactUsController);
 
-      $scope.login = function () {
-        AuthService.login($scope.user.email, $scope.user.password)
-          .then(function () {
-            // $state.go('main');
-            var next = $location.nextAfterLogin || '/main';
-            $location.nextAfterLogin = null;
-            $location.path(next);
-          }).catch(function (err) {
-            alert('用户名或者密码错误');
-          });
-      };
-    }]);
+ContactUsController.$inject = ['NgMap'];
+
+function ContactUsController(NgMap) {
+  var ctrl = this;
+
+  NgMap.getMap().then(function (map) {
+    ctrl.map = map;
+  });
+}

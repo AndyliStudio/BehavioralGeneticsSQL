@@ -7,7 +7,8 @@ angular
   .module('app', [
     'ui.router',
     'lbServices',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngMap'
   ])
   .filter('searchFor', function () {
 
@@ -92,6 +93,21 @@ angular
         templateUrl: 'views/pathway.html'
       })
       .state('contact-us', {
+        url: '/contact',
+        templateUrl: 'views/countact-us.html',
+        controller: 'ContactUsController'
+      })
+      .state('help', {
+        url: '/contact',
+        templateUrl: 'views/countact-us.html',
+        controller: 'ContactUsController'
+      })
+      .state('team', {
+        url: '/contact',
+        templateUrl: 'views/countact-us.html',
+        controller: 'ContactUsController'
+      })
+      .state('blog', {
         url: '/contact',
         templateUrl: 'views/countact-us.html',
         controller: 'ContactUsController'

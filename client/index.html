@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="styles/owl.carousel.css">
   <link rel="stylesheet" href="styles/responsive.css">
   <link rel="stylesheet" href="styles/style.css">
-  <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
   <!-- endbuild -->
 </head>
 
@@ -36,23 +35,15 @@
 
               <div class="collapse navbar-collapse top-nav" id="menu-4">
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a class="scroll" ui-sref="main">服务</a></li>
-                  <li><a class="scroll" href="#help">使用帮助</a></li>
-                  <li><a class="scroll" href="#team">团队</a></li>
-                  <li><a class="scroll" href="#blog">官方博客</a></li>
-                  <li><a class="scroll" ui-sref="contact-us">联系我们</a></li>
+                  <li><a class="scroll" ui-sref="main" ui-sref-active="active">服务</a></li>
+                  <li><a class="scroll" ui-sref="help" ui-sref-active="active">使用帮助</a></li>
+                  <li><a class="scroll" ui-sref="team" ui-sref-active="active">团队</a></li>
+                  <li><a class="scroll" ui-sref="blog" ui-sref-active="active">官方博客</a></li>
+                  <li><a class="scroll" ui-sref="contact-us" ui-sref-active="active">联系我们</a></li>
                   <li>
                     <button type="button" class="btn btn-default navbar-btn" ui-sref="login" ng-hide="currentUser">登陆</button>
                     <span class="or" ng-hide="currentUser">or</span>
                     <button type="button" class="btn btn-default navbar-btn" ui-sref="sign-up" ng-hide="currentUser">注册</button>
-                    <!-- <a href="" ng-show="currentUser" id="username">{{currentUser.username}}</a>
-                    <div class="dropdown-list" ng-show="currentUser">
-                      <ul>
-                        <li>个人信息</li>
-                        <li>搜索历史</li>
-                        <li ng-click="logout()">退出登录</li>
-                      </ul>
-                    </div> -->
                     <div class="btn-group" uib-dropdown ng-show="currentUser">
                       <button type="button" class="btn" uib-dropdown-toggle>
                         {{currentUser.username}}
@@ -96,7 +87,8 @@
   <script src="vendor/angular-ui-router.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-  <script src="bower_components/angular-amap/angular-amap.min.js"></script>
+  <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+  <script src="http://ditu.google.cn/maps/api/js?sensor=false&language=zh-CN"></script>
   <script src="js/app.js"></script>
   <script src="js/services/lb-services.js"></script>
   <script src="js/controllers/auth.js"></script>
@@ -107,7 +99,8 @@
       ///smooth scroll
       $(function () {
         $('.scroll').click(function () {
-          if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+          if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname ==
+            this.hostname) {
             var target = $(this.hash);
             target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
             if (target.length) {
@@ -120,11 +113,7 @@
         });
       });
     });
-    // 个人中心下拉菜单
-    $('#username').click(function () {
-      $('.dropdown-list').toggle()
-    });
-    $('#username').trigger('click')
+
   </script>
 </body>
 
