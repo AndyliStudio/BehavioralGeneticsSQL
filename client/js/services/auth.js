@@ -20,10 +20,9 @@ angular
         .then(function (response) {
           $rootScope.currentUser = {
             id: response.id,
-            tokenId: '',
             username: response.username,
             email: response.email
-          };
+          }
           $rootScope.logout = logout;
         });
     }
@@ -35,10 +34,10 @@ angular
         .then(function (response) {
           $rootScope.currentUser = {
             id: response.user.id,
-            tokenId: response.id,
             username: response.user.username,
             email: email
           };
+          setCookie('access_token', response.id, '2h')
         });
     }
 
@@ -61,7 +60,6 @@ angular
     }
 
     function getsec(str) {
-      alert(str);
       var str1 = str.substring(1, str.length) * 1;
       var str2 = str.substring(0, 1);
       if (str2 == "s") {

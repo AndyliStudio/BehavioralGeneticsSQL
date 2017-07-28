@@ -95,35 +95,37 @@ angular
       .state('contact-us', {
         url: '/contact',
         templateUrl: 'views/countact-us.html',
-        controller: 'ContactUsController'
+        controller: 'ContactUsController',
+        authenticate: true
       })
       .state('help', {
-        url: '/contact',
+        url: '/help',
         templateUrl: 'views/countact-us.html',
         controller: 'ContactUsController'
       })
       .state('team', {
-        url: '/contact',
+        url: '/team',
         templateUrl: 'views/countact-us.html',
         controller: 'ContactUsController'
       })
       .state('blog', {
-        url: '/contact',
+        url: '/blog',
         templateUrl: 'views/countact-us.html',
         controller: 'ContactUsController'
       })
     $urlRouterProvider.otherwise('main');
   }])
-  .run(['$rootScope', '$state', 'AuthService', function ($rootScope, $state, AuthService) {
+  .run(['$rootScope', '$state', 'AuthService', '$location', function ($rootScope, $state, AuthService, $location) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
       // 判断用户token是否有效
-      if (AuthService.isAuthenticated()) {
+      if (AuthService.isAuthenticated() && AuthService.getCookie('access_token')) {
         AuthService.getUserLoginInfo()
-      }
-      // redirect to login page if not logged in
-      if (next.authenticate && !$rootScope.currentUser) {
-        event.preventDefault(); //prevent current page from loading
-        $state.go('forbidden');
+      } else {
+        if (next.authenticate) {
+          event.preventDefault(); //prevent current page from loading
+          $location.nextAfterLogin = next.url;
+          $state.go('login');
+        }
       }
     });
   }]);

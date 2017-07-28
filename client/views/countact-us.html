@@ -27,10 +27,10 @@
       </div>
       <div class="col-md-4 col-sm-12">
         <input type="email" name="email" ng-model="contactForm.email" placeholder="邮箱" required />
-        <p ng-class="(form.email.$error.required && form.$submitted || (form.email.$invalid && form.$submitted)) ? 'error-tips show' : 'error-tips hidden'">只有填写正确邮箱，我们才能联系到您哦！</p>
+        <p ng-class="(form.email.$error.required && form.$submitted || (form.email.$invalid && form.email.$dirty)) ? 'error-tips show' : 'error-tips hidden'">只有填写正确邮箱，我们才能联系到您哦！</p>
       </div>
       <div class="col-md-4 col-sm-12">
-        <input type="number" name="tel" ng-model="contactForm.tel" placeholder="电话" 　/>
+        <input type="tel" name="tel" ng-model="contactForm.tel" placeholder="电话" 　/>
         <p ng-class="(form.tel.$invalid && form.$submitted) ? 'error-tips show' : 'error-tips hidden'">如果不介意留个联系电话吧！</p>
       </div>
       <div class="message">

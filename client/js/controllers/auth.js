@@ -239,9 +239,9 @@ angular
   ])
   .controller('ContactUsController', ContactUsController);
 
-ContactUsController.$inject = ['$rootScope', '$scope', 'NgMap'];
+ContactUsController.$inject = ['$rootScope', '$scope', 'NgMap', '$http'];
 
-function ContactUsController($rootScope, $scope, NgMap) {
+function ContactUsController($rootScope, $scope, NgMap, $http) {
   $scope.isShowWindowInfo = false
   NgMap.getMap().then(function (map) {
     $scope.map = map;
@@ -272,9 +272,21 @@ function ContactUsController($rootScope, $scope, NgMap) {
   $scope.contactForm = { name: '', email: '', tel: '', message: '' }
   $scope.submit = function () {
     if (!$scope.contactForm.name || !$scope.contactForm.email || !$scope.contactForm.message) {
-      return;
+      return
     } else {
-
+      $http({
+        method: 'post',
+        url: '/api/geneUsers/contactUs',
+        data: $scope.contactForm,
+      }).then(function successCallback(response) {
+        // if (response.data.result.errno === 0) {
+        //   window.open(response.data.result.download_url)
+        // } else {
+        //   $scope.download_fail_text = '下载失败，' + response.data.result.message
+        // }
+      }, function errorCallback(error) {
+        // $scope.download_fail_text = '下载失败，' + error.toString()
+      });
     }
   }
 }
