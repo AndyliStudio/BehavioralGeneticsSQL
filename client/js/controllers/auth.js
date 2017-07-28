@@ -269,4 +269,12 @@ function ContactUsController($rootScope, $scope, NgMap) {
     }
     $scope.isShowWindowInfo = !$scope.isShowWindowInfo
   }
+  $scope.contactForm = { name: '', email: '', tel: '', message: '' }
+  $scope.submit = function () {
+    if (!$scope.contactForm.name || !$scope.contactForm.email || !$scope.contactForm.message) {
+      return;
+    } else {
+
+    }
+  }
 }

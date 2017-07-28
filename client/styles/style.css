@@ -2057,3 +2057,89 @@ table th[class*="col-"] {
 .contactus-container .contact-way>img {
     height: 100%;
 }
+
+.contactus-container .bolang {
+    height: 30px;
+    background: url(../images/bolangxian.png) repeat-x;
+    background-position: left center;
+    background-size: 30px;
+    margin: 0 4%;
+    margin-top: -10px;
+}
+
+.contactus-container .submit-form {
+    margin: 0 14% 60px 14%;
+}
+
+.contactus-container .submit-form .title {
+    color: #4A6BB5;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 18px;
+}
+
+.contactus-container .submit-form .row>div>input {
+    width: 100%;
+    border-radius: 2px;
+    margin-bottom: 2px;
+}
+
+.contactus-container .submit-form .row>div>p {
+    padding: 0;
+    border-radius: 2px;
+    margin-bottom: 2px;
+    font-size: 12px;
+    color: #b34040;
+}
+
+.contactus-container .submit-form .row>div>p.show {
+    visibility: visible;
+}
+
+.contactus-container .submit-form .row>div>p.hidden {
+    visibility: hidden;
+    display: inline-block !important;
+}
+
+.contactus-container .submit-form .message {
+    padding: 0 15px;
+    padding-bottom: 0px;
+    position: relative;
+    overflow: hidden;
+}
+
+.contactus-container .submit-form .message>textarea {
+    width: 100%;
+    margin-bottom: 0;
+    border-radius: 2px;
+}
+
+.contactus-container .submit-form .message>button {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    background: #337ab7;
+    position: absolute;
+    color: #fff;
+    font-size: 16px;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.contactus-container .submit-form .message>button:disabled {
+    background: #999;
+}
+
+.contactus-container .submit-form .message>button:hover {
+    width: 90px;
+    height: 90px;
+    border-radius: 45px;
+    bottom: -45px;
+}
+
+.contactus-container .submit-form .message>button>span {
+    position: relative;
+    top: -16px;
+}
