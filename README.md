@@ -44,6 +44,13 @@ node server/tools/readAndSave.js
 
 ```
 ![autoImport](https://olpkwt43d.qnssl.com/benefit/autoImport.png)
+### 4. 如果user.js新建方法总是出现401权限错误，请在user.json中设置：
+```
+"mixins": {
+  "ClearBaseAcls": true
+}
+```
+这可以将用户模型基本的权限控制清除，然后自己再通过`lb acl`定义user模型的权限控制规则，详情请参见[strongloop issues](https://github.com/strongloop/loopback/issues/559)
 
 # 基因查询的算法
 snpinfo====>

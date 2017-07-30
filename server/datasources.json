@@ -12,5 +12,25 @@
     "name": "mysqlDs",
     "insecureAuth": true,
     "connector": "mysql"
+  },
+  "outlookMail": {
+    "name": "outlookMail",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp-mail.outlook.com",
+        "secure": false,
+        "port": 587,
+        "tls": {
+          "ciphers": "SSLv3",
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "andyliwr@outlook.com",
+          "pass": "121960425wr"
+        }
+      }
+    ]
   }
 }

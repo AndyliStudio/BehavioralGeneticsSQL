@@ -36,9 +36,15 @@
       <div class="message">
         <textarea name="message" ng-model="contactForm.message" cols="30" rows="10" placeholder="请输入内容" required></textarea>
         <button ng-disabled="(form.name.$dirty && form.name.$error.required ||
-  form.email.$dirty && form.email.$invalid || form.message.$dirty && form.message.$error.required) ? 'disabled' : ''"><span>提交</span></button>
+  form.email.$dirty && form.email.$invalid || form.message.$dirty && form.message.$error.required) ? 'disabled' : ''"><span class="text">提交</span><span ng-show="isDoSubmit" class="icon-loading"></span></button>
       </div>
     </form>
   </div>
-
+  <!-- alert -->
+  <script type="text/ng-template" id="alert.html">
+    <div ng-transclude></div>
+  </script>
+  <div uib-alert ng-show="alert.isShow" template-url="alert.html" dismiss-on-timeout="3000" closeable="true" ng-class="{'alert-warning': alert.type === 'warning', 'alert-success': alert.type === 'success', 'alert-enter': alert.animate === 'enter', 'alert-out': alert.animate === 'out'}">{{alert.message}}
+    <span class="close-alert" ng-click="closeAlert()">x</span>
+  </div>
 </div>

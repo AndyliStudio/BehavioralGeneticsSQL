@@ -2021,6 +2021,37 @@ table th[class*="col-"] {
 
 /* 联系我们 */
 
+.contactus-container {
+    overflow: hidden;
+}
+
+.contactus-container .alert {
+    position: fixed;
+    width: 300px;
+    top: 80px;
+    right: -300px;
+}
+
+.contactus-container .alert.alert-enter {
+    right: 20px;
+    transition: right 2s;
+    -moz-transition: right 2s;
+    -webkit-transition: right 2s;
+    -o-transition: right 2s;
+}
+
+.contactus-container .alert .close-alert {
+    font-size: 16px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
 .contactus-container #map {
     height: 300px;
 }
@@ -2139,7 +2170,18 @@ table th[class*="col-"] {
     bottom: -45px;
 }
 
-.contactus-container .submit-form .message>button>span {
+.contactus-container .submit-form .message>button>.text {
     position: relative;
     top: -16px;
+}
+
+.contactus-container .submit-form .message>button>.icon-loading {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: url(../images/loading.gif) no-repeat;
+    background-size: 15px 15px;
+    position: relative;
+    top: -14px;
+    margin-left: 4px
 }

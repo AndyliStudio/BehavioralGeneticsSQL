@@ -38,5 +38,9 @@
   "user": {
     "dataSource": "mysqlDs",
     "public": true
+  },
+  "email": {
+    "dataSource": "outlookMail",
+    "public": true
   }
 }

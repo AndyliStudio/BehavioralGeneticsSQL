@@ -237,56 +237,66 @@ angular
       }
     }
   ])
-  .controller('ContactUsController', ContactUsController);
+  .controller('ContactUsController', ['$rootScope', '$scope', 'NgMap', '$http',
+    function ($rootScope, $scope, NgMap, $http) {
+      $scope.isShowWindowInfo = false
+      NgMap.getMap().then(function (map) {
+        $scope.map = map;
+      })
+      $scope.clicked = function () {
+        window.open('https://goo.gl/maps/LYLtGWPo1ED2')
+      }
+      $scope.isDoSubmit = false // 
+      $scope.isFinishSubmit = false // 是否完成提交请求的发送
+      $scope.isSubmitSuccess = false // 是否提交反馈成功
+      $scope.alert = { isShow: false, type: '', message: '', animate: '' } // 警告提示
+      setTimeout(function () {
+        $scope.alert = { isShow: true, type: 'warning', message: '错误错误处', animate: 'enter' } // 警告提示
+      }, 10000)
+      $scope.closeAlert = function () {
+        $scope.alert = { isShow: false, type: '', message: '' } // 警告提示
+      }
+      $scope.shops = [{
+        id: '西南大学（SourthWest University）',
+        address: '中国重庆市北碚区天生丽街西南大学25教学楼',
+        english_addr: 'Chian Chongqing Beibei Tiansheng SourthWest University',
+        postnum: '400715',
+        tel: '18883339779',
+        position: [29.820065, 106.424587]
+      }]
+      $scope.shop = $scope.shops[0]
 
-ContactUsController.$inject = ['$rootScope', '$scope', 'NgMap', '$http'];
-
-function ContactUsController($rootScope, $scope, NgMap, $http) {
-  $scope.isShowWindowInfo = false
-  NgMap.getMap().then(function (map) {
-    $scope.map = map;
-  })
-  $scope.clicked = function () {
-    window.open('https://goo.gl/maps/LYLtGWPo1ED2')
-  }
-
-  $scope.shops = [{
-    id: '西南大学（SourthWest University）',
-    address: '中国重庆市北碚区天生丽街西南大学25教学楼',
-    english_addr: 'Chian Chongqing Beibei Tiansheng SourthWest University',
-    postnum: '400715',
-    tel: '18883339779',
-    position: [29.820065, 106.424587]
-  }]
-  $scope.shop = $scope.shops[0]
-
-  $scope.showDetail = function (e, shop) {
-    if ($scope.isShowWindowInfo) {
-      $scope.map.hideInfoWindow('foo-iw');
-    } else {
-      $scope.shop = shop;
-      $scope.map.showInfoWindow('foo-iw', shop.id);
+      $scope.showDetail = function (e, shop) {
+        if ($scope.isShowWindowInfo) {
+          $scope.map.hideInfoWindow('foo-iw');
+        } else {
+          $scope.shop = shop;
+          $scope.map.showInfoWindow('foo-iw', shop.id);
+        }
+        $scope.isShowWindowInfo = !$scope.isShowWindowInfo
+      }
+      $scope.contactForm = { name: '', email: '', tel: '', message: '' }
+      $scope.submit = function () {
+        if (!$scope.contactForm.name || !$scope.contactForm.email || !$scope.contactForm.message) {
+          return
+        } else {
+          $scope.isDoSubmit = true
+          $http({
+            method: 'post',
+            url: '/api/users/contactUs',
+            data: $scope.contactForm,
+          }).then(function successCallback(response) {
+            $scope.isDoSubmit = false
+            $scope.isFinishSubmit = true
+            if (response.data.result.code === 0) {
+              $scope.feedback = '谢谢，我们已经收到您的反馈，会再第一时间答复您。'
+            } else {
+              $scope.feedback = '对不起，我们已经收到您的反馈，会再第一时间答复您。'
+            }
+          }, function errorCallback(error) {
+            // $scope.download_fail_text = '下载失败，' + error.toString()
+          });
+        }
+      }
     }
-    $scope.isShowWindowInfo = !$scope.isShowWindowInfo
-  }
-  $scope.contactForm = { name: '', email: '', tel: '', message: '' }
-  $scope.submit = function () {
-    if (!$scope.contactForm.name || !$scope.contactForm.email || !$scope.contactForm.message) {
-      return
-    } else {
-      $http({
-        method: 'post',
-        url: '/api/geneUsers/contactUs',
-        data: $scope.contactForm,
-      }).then(function successCallback(response) {
-        // if (response.data.result.errno === 0) {
-        //   window.open(response.data.result.download_url)
-        // } else {
-        //   $scope.download_fail_text = '下载失败，' + response.data.result.message
-        // }
-      }, function errorCallback(error) {
-        // $scope.download_fail_text = '下载失败，' + error.toString()
-      });
-    }
-  }
-}
+  ]);
