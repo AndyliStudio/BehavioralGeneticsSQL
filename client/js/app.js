@@ -8,6 +8,7 @@ angular
     'ui.router',
     'lbServices',
     'ui.bootstrap',
+    'ngAnimate',
     'ngMap'
   ])
   .filter('searchFor', function () {

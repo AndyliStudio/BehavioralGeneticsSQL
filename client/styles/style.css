@@ -2034,10 +2034,18 @@ table th[class*="col-"] {
 
 .contactus-container .alert.alert-enter {
     right: 20px;
-    transition: right 2s;
-    -moz-transition: right 2s;
-    -webkit-transition: right 2s;
-    -o-transition: right 2s;
+    transition: right .3s;
+    -moz-transition: right .3s;
+    -webkit-transition: right .3s;
+    -o-transition: right .3s;
+}
+
+.contactus-container .alert.alert-out {
+    right: -300px;
+    transition: right .3s;
+    -moz-transition: right .3s;
+    -webkit-transition: right .3s;
+    -o-transition: right .3s;
 }
 
 .contactus-container .alert .close-alert {
@@ -2050,6 +2058,7 @@ table th[class*="col-"] {
     height: 30px;
     line-height: 30px;
     text-align: center;
+    cursor: pointer;
 }
 
 .contactus-container #map {
@@ -2100,6 +2109,12 @@ table th[class*="col-"] {
 
 .contactus-container .submit-form {
     margin: 0 14% 60px 14%;
+}
+
+.contactus-container .submit-form .success-result {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 16px;
 }
 
 .contactus-container .submit-form .title {

@@ -249,12 +249,9 @@ angular
       $scope.isDoSubmit = false // 
       $scope.isFinishSubmit = false // 是否完成提交请求的发送
       $scope.isSubmitSuccess = false // 是否提交反馈成功
-      $scope.alert = { isShow: false, type: '', message: '', animate: '' } // 警告提示
-      setTimeout(function () {
-        $scope.alert = { isShow: true, type: 'warning', message: '错误错误处', animate: 'enter' } // 警告提示
-      }, 10000)
+      $scope.alert = { isShow: false, type: '', message: '', animate: 'out' } // 警告提示
       $scope.closeAlert = function () {
-        $scope.alert = { isShow: false, type: '', message: '' } // 警告提示
+        $scope.alert = { isShow: false, type: '', message: '', animate: 'out' } // 警告提示
       }
       $scope.shops = [{
         id: '西南大学（SourthWest University）',
@@ -289,12 +286,13 @@ angular
             $scope.isDoSubmit = false
             $scope.isFinishSubmit = true
             if (response.data.result.code === 0) {
-              $scope.feedback = '谢谢，我们已经收到您的反馈，会再第一时间答复您。'
+              $scope.isSubmitSuccess = true
+              $scope.alert = { isShow: true, type: 'success', message: '发送反馈成功！', animate: 'enter' } // 警告提示
             } else {
-              $scope.feedback = '对不起，我们已经收到您的反馈，会再第一时间答复您。'
+              $scope.alert = { isShow: true, type: 'error', message: '发送反馈失败！' + response.data.result.message, animate: 'out' } // 警告提示
             }
           }, function errorCallback(error) {
-            // $scope.download_fail_text = '下载失败，' + error.toString()
+            $scope.alert = { isShow: true, type: 'error', message: '发送反馈失败！' + error.toString(), animate: 'out' } // 警告提示
           });
         }
       }

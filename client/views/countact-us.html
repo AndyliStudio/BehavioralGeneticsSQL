@@ -20,7 +20,8 @@
   <div class="bolang"></div>
   <div class="submit-form">
     <div class="title">联系我们</div>
-    <form class="row" name="form" ng-submit="submit()" novalidate>
+    <p ng-show="isSubmitSuccess" class="success-result">已经收到您的反馈，我们会在第一时间回复您的。</p>
+    <form ng-show="!isSubmitSuccess" class="row" name="form" ng-submit="submit()" novalidate>
       <div class="col-md-4 col-sm-12">
         <input type="text" name="name" ng-model="contactForm.name" placeholder="姓名" required />
         <p ng-class="(form.name.$error.required && form.$submitted) ? 'error-tips show' : 'error-tips hidden'">hello！请问如何称呼您？</p>
