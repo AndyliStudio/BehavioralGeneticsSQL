@@ -74,7 +74,7 @@
         <div class="row">
           <div class="col-md-12 col-sm-12 col-md-12 text-center">
             <p> Copyright 2016 | All Rights Reserved.
-              <span class="scroll-span"><a href="#home" class="scroll"><i class="lnr lnr lnr-chevron-up"></i></a></span></p>
+              <span class="scroll-span"><a class="up-scroll"><i class="lnr lnr lnr-chevron-up"></i></a></span></p>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-resource/angular-resource.min.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- <script src="bower_components/jquery/dist/jquery.min.js"></script> -->
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script src="bower_components/angular-animate/angular-animate.min.js"></script>
   <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
@@ -96,24 +96,36 @@
   <script src="js/services/auth.js"></script>
   <!--滑动效果-->
   <script type="text/javascript" defer="defer">
-    $(document).ready(function () {
-      ///smooth scroll
-      $(function () {
-        $('.scroll').click(function () {
-          if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname ==
-            this.hostname) {
-            var target = $(this.hash);
-            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-            if (target.length) {
-              $('html, body').animate({
-                scrollTop: target.offset().top - 69
-              }, 800);
-              return false;
+    /**
+     * 获取滚动条距离顶端的距离
+     * @return {}支持IE6
+     */
+    function getScrollTop() {
+      var scrollPos;
+      if (window.pageYOffset) {
+        scrollPos = window.pageYOffset;
+      }
+      else if (document.compatMode && document.compatMode != 'BackCompat')
+      { scrollPos = document.documentElement.scrollTop; }
+      else if (document.body) { scrollPos = document.body.scrollTop; }
+      return scrollPos;
+    }
+    window.onload = function () {
+      var scrollEle = document.querySelector('.up-scroll, .up-scroll>i')
+      scrollEle.onclick = function (event) {
+        (function () {
+          var total = getScrollTop()
+          var timer = setInterval(function () {
+            total -= 10
+            document.body.scrollTop = total ? total : 0
+            if (total == 0) {
+              clearInterval(timer)
             }
-          }
-        });
-      });
-    });
+          }, 20)
+        })()
+        return false;
+      }
+    }
   </script>
 </body>
 
