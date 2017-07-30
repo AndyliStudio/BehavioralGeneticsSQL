@@ -32,6 +32,7 @@ angular
         .login({ rememberMe: true }, { email: email, password: password })
         .$promise
         .then(function (response) {
+          $rootScope.isLogined = true
           $rootScope.currentUser = {
             id: response.user.id,
             username: response.user.username,
@@ -46,7 +47,7 @@ angular
         .logout()
         .$promise
         .then(function () {
-          $rootScope.currentUser = null;
+          $rootScope.isLogined = false
         });
     }
 

@@ -41,10 +41,10 @@
                   <li><a class="scroll" ui-sref="blog" ui-sref-active="active">官方博客</a></li>
                   <li><a class="scroll" ui-sref="contact-us" ui-sref-active="active">联系我们</a></li>
                   <li>
-                    <button type="button" class="btn btn-default navbar-btn" ui-sref="login" ng-hide="currentUser">登陆</button>
-                    <span class="or" ng-hide="currentUser">or</span>
-                    <button type="button" class="btn btn-default navbar-btn" ui-sref="sign-up" ng-hide="currentUser">注册</button>
-                    <div class="btn-group" uib-dropdown ng-show="currentUser">
+                    <button type="button" class="btn btn-default navbar-btn" ui-sref="login" ng-hide="isLogined">登陆</button>
+                    <span class="or" ng-hide="isLogined">or</span>
+                    <button type="button" class="btn btn-default navbar-btn" ui-sref="sign-up" ng-hide="isLogined">注册</button>
+                    <div class="btn-group" uib-dropdown ng-show="isLogined">
                       <button type="button" class="btn" uib-dropdown-toggle>
                         {{currentUser.username}}
                         <span class="caret"></span>

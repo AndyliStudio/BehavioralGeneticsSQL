@@ -61,10 +61,6 @@ angular
         templateUrl: 'views/login.html',
         controller: 'AuthLoginController'
       })
-      .state('logout', {
-        url: '/logout',
-        controller: 'AuthLogoutController'
-      })
       .state('sign-up', {
         url: '/sign-up',
         templateUrl: 'views/sign-up-form.html',
@@ -77,21 +73,25 @@ angular
       .state('phenotype', {
         url: '/phenotype',
         templateUrl: 'views/phenotype.html',
-        controller: 'PhenotypeController'
+        controller: 'PhenotypeController',
+        authenticate: true
       })
       .state('gene_region', {
         url: '/gene_region',
         templateUrl: 'views/gene_region.html',
-        controller: 'Gene_regionController'
+        controller: 'Gene_regionController',
+        authenticate: true
       })
       .state('marker', {
         url: '/marker',
         templateUrl: 'views/marker.html',
-        controller: 'MarkerController'
+        controller: 'MarkerController',
+        authenticate: true
       })
       .state('pathway', {
         url: '/pathway',
-        templateUrl: 'views/pathway.html'
+        templateUrl: 'views/pathway.html',
+        authenticate: true
       })
       .state('contact-us', {
         url: '/contact',
@@ -117,6 +117,22 @@ angular
     $urlRouterProvider.otherwise('main');
   }])
   .run(['$rootScope', '$state', 'AuthService', '$location', function ($rootScope, $state, AuthService, $location) {
+    // 判断用户token是否有效
+    if (AuthService.isAuthenticated() && AuthService.getCookie('access_token')) {
+      $rootScope.isLogined = true
+      AuthService.getUserLoginInfo()
+    } else {
+      $rootScope.isLogined = false
+      // 判断是否为必须登录的页面
+      var needLoginPages = ['/pathway', '/contact', '/gene_region', '/marker', '/phenotype']
+      var isInNeedLoginPages = needLoginPages.some(function (item) {
+        return $location.$$path === item
+      })
+      if (isInNeedLoginPages) {
+        $location.nextAfterLogin = $location.$$path;
+        $location.path('/login')
+      }
+    }
     $rootScope.$on('$stateChangeStart', function (event, next) {
       // 判断用户token是否有效
       if (AuthService.isAuthenticated() && AuthService.getCookie('access_token')) {
@@ -125,7 +141,7 @@ angular
         if (next.authenticate) {
           event.preventDefault(); //prevent current page from loading
           $location.nextAfterLogin = next.url;
-          $state.go('login');
+          $location.path('/login');
         }
       }
     });
