@@ -1,6 +1,7 @@
 node_modules
 coverage
 client/bower_components
+blog/node_modules
 dist
 server/download
 
