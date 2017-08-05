@@ -13,7 +13,6 @@ module.exports = function (app) {
       } else {
         res.send('文件不存在！')
       }
-      next()
     })
   })
 };

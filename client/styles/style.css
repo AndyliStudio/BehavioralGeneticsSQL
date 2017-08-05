@@ -2200,3 +2200,74 @@ table th[class*="col-"] {
     top: -14px;
     margin-left: 4px
 }
+
+
+/* 团队样式 */
+
+.team-container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.team-container>h1 {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #d7d7d7;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.team-container .team-des {
+    font-size: 15px;
+}
+
+.team-container .team-des>a {
+    cursor: pointer;
+}
+
+.team-container .persons {
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.team-container .persons>.person {
+    width: 50%;
+    height: 200px;
+    float: left;
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.team-container .person .avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    background-position: center;
+    background-size: contain;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.team-container .person .info {
+    flex: 1;
+    margin-left: 20px;
+    line-height: 1.6em;
+}
+
+.team-container .person .contact {
+    padding-top: 0px;
+    position: absolute;
+    left: 170px;
+    bottom: 0;
+}
+
+.team-container .award {
+    text-align: center;
+    padding: 30px;
+}

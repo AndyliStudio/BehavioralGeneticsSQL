@@ -297,4 +297,8 @@ angular
         }
       }
     }
+  ])
+  .controller('TeamController', ['$scope', '$state',
+    function ($scope, $state) {
+    }
   ]);

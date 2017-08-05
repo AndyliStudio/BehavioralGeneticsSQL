@@ -106,13 +106,8 @@ angular
       })
       .state('team', {
         url: '/team',
-        templateUrl: 'views/countact-us.html',
-        controller: 'ContactUsController'
-      })
-      .state('blog', {
-        url: '/blog',
-        templateUrl: 'views/countact-us.html',
-        controller: 'ContactUsController'
+        templateUrl: 'views/team.html',
+        controller: 'TeamController'
       })
     $urlRouterProvider.otherwise('main');
   }])
