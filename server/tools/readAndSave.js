@@ -168,12 +168,12 @@ function doRead(url, filename, total, callback) {
         finalData02.replicon_accession = byteArr[1]
         finalData02.start = byteArr[2]
         finalData02.stop = byteArr[3]
-        finalData02.strand = byteArr[4]
-        finalData02.gene_id = byteArr[5]
-        finalData02.locus = byteArr[6]
-        finalData02.protein_product = byteArr[7]
-        finalData02.length = byteArr[8]
-        finalData02.protein_name = byteArr[9]
+        finalData02.strand = byteArr[4] + '' + byteArr[5]
+        finalData02.gene_id = byteArr[6]
+        finalData02.locus = byteArr[7]
+        finalData02.protein_product = byteArr[8]
+        finalData02.length = byteArr[9]
+        finalData02.protein_name = byteArr[10]
         doSave('gene_info', finalData02, function (obj) {
           if (!obj) {
             pb.tick({

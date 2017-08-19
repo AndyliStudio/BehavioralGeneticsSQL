@@ -301,4 +301,79 @@ angular
   .controller('TeamController', ['$scope', '$state',
     function ($scope, $state) {
     }
+  ])
+  .controller('PathwayController', ['$scope', 'Snp_info', 'Gene_info', 'Pathway', '$state',
+    function ($scope, Snp_info, Gene_info, Pathway, $state) {
+      $scope.sstr = ''
+      $scope.suggests = []
+      $scope.thisPathway = {}
+      $scope.isShowTable = false
+      $scope.isShowSuggest = false
+      $scope.searchPathway = function () {
+        $scope.isShowSuggest = true
+        Pathway.find({
+          filter: {
+            where: {
+              pathway: {
+                like: "%" + $scope.sstr + "%"
+              }
+            },
+            fields: {
+              pathway: true,
+              genes: true,
+              id: true
+            }
+          }
+        })
+          .$promise
+          .then(function (res) {
+            if (res instanceof Array) {
+              res.forEach(item => {
+                if ($scope.suggests.length < 10) {
+                  $scope.suggests.push({
+                    id: item.id,
+                    text: item.pathway,
+                    genes: item.genes
+                  })
+                }
+              })
+            }
+          })
+      };
+      $scope.showPathway = function (id, genes) {
+        // 遍历所有的genes
+        genes.forEach(item => {
+          console.log(Gene_info)
+          Gene_info.find({
+            filter: {
+              where: {
+                gene_id: item
+              },
+              fields: {
+                start: true,
+                stop: true
+              }
+            }
+          })
+            .$promise
+            .then(function (res) {
+              console.log(res)
+            })
+        })
+        // $scope.sstr = genes
+        // Snp_info.find({
+        //   filter: {
+        //     where: {
+        //       id: id
+        //     }
+        //   }
+        // })
+        //   .$promise
+        //   .then(function (res) {
+        //     $scope.isShowSuggest = false
+        //     $scope.isShowTable = true
+        //     $scope.thisPathway = res[0]
+        //   })
+      };
+    }
   ]);

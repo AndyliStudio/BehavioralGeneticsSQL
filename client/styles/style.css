@@ -2271,3 +2271,115 @@ table th[class*="col-"] {
     text-align: center;
     padding: 30px;
 }
+
+
+/* pathway页面样式 */
+
+.pathway-container {
+    padding-top: 2em;
+}
+
+.pathway-container>h1 {
+    font-size: 20px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.pathway-container .searchDiv {
+    width: 34em;
+    margin: 2em auto 0 auto;
+    height: 2.8em;
+    white-space: nowrap;
+}
+
+.pathway-container .searchDiv .input>input {
+    height: 2.8em;
+    width: 28em;
+    background-color: white;
+    padding: 0 1em;
+    box-sizing: border-box;
+    border: 1px solid #d7d7d7;
+    margin-bottom: 0px;
+}
+
+.pathway-container .searchDiv .input>button {
+    padding: 0px;
+    border: 0px;
+    height: 2.8em;
+    width: 100px;
+    background-color: #3385FF;
+    color: #fff;
+    font-size: 14px;
+}
+
+.pathway-container .searchHistory {
+    position: absolute;
+    width: 900px;
+    height: 120px;
+    left: 50%;
+    top: 35%;
+    margin-left: -450px;
+    margin-top: -60px;
+}
+
+.pathway-container .searchHistory a {
+    text-decoration: solid;
+    margin-right: 20px;
+}
+
+.pathway-container .searchHistory div {
+    background-color: #dBdAd9;
+    height: 100px;
+    padding: 20px;
+}
+
+.pathway-container .friendLink {
+    position: absolute;
+    width: 900px;
+    height: 120px;
+    left: 50%;
+    top: 62%;
+    margin-left: -450px;
+    margin-top: -60px;
+}
+
+.pathway-container .friendLinkChild {
+    background-color: #dBdAd9;
+}
+
+.pathway-container .friendLinkChild div {
+    float: left;
+    margin-right: 20px;
+    width: 100px;
+    height: 100px;
+    background-color: #3f86b7;
+}
+
+.pathway-container .search-suggest {
+    border: 1px solid #d7d7d7;
+    border-top: 0;
+    width: 28em;
+    background: #fff;
+    z-index: 1000;
+    position: absolute;
+}
+
+.pathway-container .search-suggest>ul>li {
+    list-style: none;
+    height: 2em;
+    line-height: 2em;
+    padding: 0 1em;
+}
+
+.pathway-container .search-suggest>ul>li:hover {
+    background: #d7d7d7;
+}
+
+.pathway-container .result {
+    margin: 1em auto 0 auto;
+    width: 48em;
+}
+
+.pathway-container .result>p {
+    padding-left: 0;
+}

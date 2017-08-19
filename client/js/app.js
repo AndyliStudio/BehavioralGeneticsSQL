@@ -91,6 +91,7 @@ angular
       .state('pathway', {
         url: '/pathway',
         templateUrl: 'views/pathway.html',
+        controller: 'PathwayController',
         authenticate: true
       })
       .state('contact-us', {

@@ -22,7 +22,7 @@
       "type": "string"
     },
     "gene_id": {
-      "type": "number"
+      "type": "string"
     },
     "locus": {
       "type": "string"
