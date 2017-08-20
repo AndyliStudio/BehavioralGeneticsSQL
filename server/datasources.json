@@ -8,7 +8,7 @@
     "port": 3306,
     "database": "gene",
     "username": "root",
-    "password": "123456",
+    "password": "121960425mysql",
     "name": "mysqlDs",
     "insecureAuth": true,
     "connector": "mysql"
