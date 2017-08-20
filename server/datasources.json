@@ -4,7 +4,7 @@
     "connector": "memory"
   },
   "mysqlDs": {
-    "host": "127.0.0.1",
+    "host": "118.89.148.108",
     "port": 3306,
     "database": "gene",
     "username": "root",

@@ -352,28 +352,112 @@ angular
               fields: {
                 start: true,
                 stop: true
-              }
+              },
+              limit: 1
             }
           })
             .$promise
             .then(function (res) {
-              console.log(res)
+              if(res instanceof Array && res.length > 0){
+                // find all snps where pos bettwen start_pos and end_pos
+                Snp_info.find({
+                  filter: {
+                    where: {
+                      pos: {
+                        gte: res[0].start,
+                        ite: res[0].stop
+                      }
+                    }
+                  }
+                })
+                  .$promise
+                  .then(function (snpRes){
+                    console.log(snpRes)
+                  })
+              }else{
+                console.log("can't found such gene_info where gene_id is " + item)
+              }
             })
         })
-        // $scope.sstr = genes
-        // Snp_info.find({
-        //   filter: {
-        //     where: {
-        //       id: id
-        //     }
-        //   }
-        // })
-        //   .$promise
-        //   .then(function (res) {
-        //     $scope.isShowSuggest = false
-        //     $scope.isShowTable = true
-        //     $scope.thisPathway = res[0]
-        //   })
+      };
+      var data = function() {
+        return [{
+            name: 'Netflix',
+            period: 'JAN',
+            value: 48
+        }, {
+            name: 'Popcorn Time',
+            period: 'JAN',
+            value: 20
+        }, {
+            name: 'HBO',
+            period: 'JAN',
+            value: 80
+        }, {
+            name: 'Telecine',
+            period: 'JAN',
+            value: 78
+        }, {
+            name: 'Netflix',
+            period: 'FEV',
+            value: 38
+        }, {
+            name: 'Popcorn Time',
+            period: 'FEV',
+            value: 48
+        }, {
+            name: 'HBO',
+            period: 'FEV',
+            value: 50
+        }, {
+            name: 'Telecine',
+            period: 'FEV',
+            value: 48
+        }, {
+            name: 'Netflix',
+            period: 'MAR',
+            value: 57
+        }, {
+            name: 'Popcorn Time',
+            period: 'MAR',
+            value: 69
+        }, {
+            name: 'HBO',
+            period: 'MAR',
+            value: 50
+        }, {
+            name: 'Telecine',
+            period: 'MAR',
+            value: 48
+        }, {
+            name: 'Netflix',
+            period: 'ABR',
+            value: 78
+        }, {
+            name: 'Popcorn Time',
+            period: 'ABR',
+            value: 76
+        }, {
+            name: 'HBO',
+            period: 'ABR',
+            value: 58
+        }, {
+            name: 'Telecine',
+            period: 'ABR',
+            value: 48
+        }];
+      };
+      $scope.arr = new data();
+
+      var count = 0;
+      $scope.displayFunction = function () {
+          count++;
+          return count+ ' ' +this.name;
+      };
+
+      $scope.tootipFunction = function () {
+          var color = "style=\"color: "+this.series.color+"\"";
+          return  "<span "+color+">"+ this.x +"</span><br>"+"<span "+color+">"+this.series.name+": </span> <b>"+this.point.y+"</b>"
       };
     }
   ]);

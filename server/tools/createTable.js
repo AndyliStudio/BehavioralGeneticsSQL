@@ -6,7 +6,7 @@ var app = require(path.resolve(__dirname, '../server'))
 var eventproxy = require('eventproxy')
 
 var ep = new eventproxy()
-ep.all('user', 'AccessToken', 'ACL', 'RoleMapping', 'Role', 'gene_info', 'pathway', 'snp_info', 'email', function (accesstoken, acl, rolemapping, role, geneinfo, pathway, snpinfo, email) {
+ep.all('user', 'AccessToken', 'ACL', 'RoleMapping', 'Role', 'gene_info', 'pathway', 'snp_info', function (accesstoken, acl, rolemapping, role, geneinfo, pathway, snpinfo, email) {
   console.log('\nEverything is ready!')
   dataSource.disconnect()
   process.exit(0)

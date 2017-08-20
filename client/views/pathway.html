@@ -10,6 +10,17 @@
       </ul>
     </div>
   </div>
+  <div id="container"></div>
+  <highchart type="column" data="arr"
+             title="Movie Audience Measurement"
+             subtitle="Source: PirateBay"
+             y-title="Quantitative (MM)"
+             y-Field="value"
+             display-name="name"
+             legend-formatter="displayFunction"
+             tooltip-formatter="tootipFunction"
+             category-field="period">
+  </highchart>
   <div class="result" ng-show="thisPathway.marker">
     <p>查询得到的信息如下：</p>
     <table class="table table-bordered">

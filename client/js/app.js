@@ -9,7 +9,8 @@ angular
     'lbServices',
     'ui.bootstrap',
     'ngAnimate',
-    'ngMap'
+    'ngMap',
+    'ngHighcharts'
   ])
   .filter('searchFor', function () {
 
