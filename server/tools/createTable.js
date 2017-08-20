@@ -63,9 +63,3 @@ dataSource.automigrate('snp_info', function (err) {
   ep.emit('snp_info', '')
 })
 
-dataSource.automigrate('email', function (err) {
-  if (err) throw err
-  console.log('email表初始化完毕!')
-  ep.emit('email', '')
-})
-
