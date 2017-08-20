@@ -15,35 +15,35 @@ ep.all('user', 'AccessToken', 'ACL', 'RoleMapping', 'Role', 'gene_info', 'pathwa
 var dataSource = app.dataSources.mysqlDs
 
 //生成必备表
-// dataSource.automigrate('user', function (err) {
-//   if (err) throw err
-//   console.log('user表初始化完毕!')
-//   ep.emit('user', '')
-// })
+dataSource.automigrate('user', function (err) {
+  if (err) throw err
+  console.log('user表初始化完毕!')
+  ep.emit('user', '')
+})
 
-// dataSource.automigrate('AccessToken', function (err) {
-//   if (err) throw err
-//   console.log('AccessToken表初始化完毕!')
-//   ep.emit('AccessToken', '')
-// })
+dataSource.automigrate('AccessToken', function (err) {
+  if (err) throw err
+  console.log('AccessToken表初始化完毕!')
+  ep.emit('AccessToken', '')
+})
 
-// dataSource.automigrate('ACL', function (err) {
-//   if (err) throw err
-//   console.log('ACL表初始化完毕!')
-//   ep.emit('ACL', '')
-// })
+dataSource.automigrate('ACL', function (err) {
+  if (err) throw err
+  console.log('ACL表初始化完毕!')
+  ep.emit('ACL', '')
+})
 
-// dataSource.automigrate('RoleMapping', function (err) {
-//   if (err) throw err
-//   console.log('RoleMapping表初始化完毕!')
-//   ep.emit('RoleMapping', '')
-// })
+dataSource.automigrate('RoleMapping', function (err) {
+  if (err) throw err
+  console.log('RoleMapping表初始化完毕!')
+  ep.emit('RoleMapping', '')
+})
 
-// dataSource.automigrate('Role', function (err) {
-//   if (err) throw err
-//   console.log('Role表初始化完毕!')
-//   ep.emit('Role', '')
-// })
+dataSource.automigrate('Role', function (err) {
+  if (err) throw err
+  console.log('Role表初始化完毕!')
+  ep.emit('Role', '')
+})
 
 dataSource.automigrate('gene_info', function (err) {
   if (err) throw err
@@ -63,9 +63,9 @@ dataSource.automigrate('snp_info', function (err) {
   ep.emit('snp_info', '')
 })
 
-// dataSource.automigrate('email', function (err) {
-//   if (err) throw err
-//   console.log('email表初始化完毕!')
-//   ep.emit('email', '')
-// })
+dataSource.automigrate('email', function (err) {
+  if (err) throw err
+  console.log('email表初始化完毕!')
+  ep.emit('email', '')
+})
 
