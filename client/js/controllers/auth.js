@@ -308,39 +308,47 @@ angular
       $scope.suggests = []
       $scope.thisPathway = {}
       $scope.isShowTable = false
-      $scope.isShowSuggest = false
+      $scope.isShowSuggest = false // wheather show suggest panel
+      $scope.showLoading = false // wheather show loading panel
       $scope.searchPathway = function () {
-        $scope.isShowSuggest = true
-        Pathway.find({
-          filter: {
-            where: {
-              pathway: {
-                like: "%" + $scope.sstr + "%"
-              }
-            },
-            fields: {
-              pathway: true,
-              genes: true,
-              id: true
-            }
-          }
-        })
-          .$promise
-          .then(function (res) {
-            if (res instanceof Array) {
-              res.forEach(item => {
-                if ($scope.suggests.length < 10) {
-                  $scope.suggests.push({
-                    id: item.id,
-                    text: item.pathway,
-                    genes: item.genes
-                  })
+        if($scope.sstr){
+          $scope.isShowSuggest = true
+          Pathway.find({
+            filter: {
+              where: {
+                pathway: {
+                  like: "%" + $scope.sstr + "%"
                 }
-              })
+              },
+              fields: {
+                pathway: true,
+                genes: true,
+                id: true
+              }
             }
           })
+            .$promise
+            .then(function (res) {
+              if (res instanceof Array) {
+                res.forEach(item => {
+                  if ($scope.suggests.length < 10) {
+                    $scope.suggests.push({
+                      id: item.id,
+                      text: item.pathway,
+                      genes: item.genes
+                    })
+                  }
+                })
+              }
+            })
+        }else{
+          $scope.isShowSuggest = false
+        }
       };
       $scope.showPathway = function (id, genes) {
+        // close search suggest
+        $scope.isShowSuggest = false
+        $scope.showLoading = true;
         // 遍历所有的genes
         genes.forEach(item => {
           console.log(Gene_info)

@@ -55,12 +55,14 @@
                   </li>
                 </ul>
               </div>
-              <div id="menu-xs" class="hidden-sm visiable-xs">
+              <div id="menu-xs" class="hidden-lg hidden-md hidden-sm visiable-xs">
                 <ul>
-                  <li>服务</li>
-                  <li>团队</li>
+                  <li ui-sref="main" ui-sref-active="active">服务</li>
+                  <li ui-sref="team" ui-sref-active="active">团队</li>
                   <li>官方博客</li>
-                  <li>联系我们</li>
+                  <li ui-sref="contact-us" ui-sref-active="active">联系我们</li>
+                  <li ui-sref="login" ui-sref-active="active">登陆</li>
+                  <li ui-sref="sign-up" ui-sref-active="active">注册</li>
                 </ul>
               </div>
             </div>
@@ -103,6 +105,14 @@
   <script src="js/services/auth.js"></script>
   <!--滑动效果-->
   <script type="text/javascript" defer="defer">
+    // H5 navigation
+    $('.navbar-toggle').click(function(){
+      if($('#menu-xs').css('height') === '0px'){
+        $('#menu-xs').animate({height: '178px'})
+      }else{
+        $('#menu-xs').animate({height: 0})
+      }
+    })
     /**
      * 获取滚动条距离顶端的距离
      * @return {}支持IE6
@@ -125,10 +135,10 @@
           var timer = setInterval(function () {
             total -= 10
             document.body.scrollTop = total ? total : 0
-            if (total == 0) {
+            if (total <= 0) {
               clearInterval(timer)
             }
-          }, 20)
+          }, 5)
         })()
         return false;
       }

@@ -2311,21 +2311,6 @@ table th[class*="col-"] {
     color: #fff;
     font-size: 14px;
 }
-@media(max-width: 786px){
-    .pathway-container .searchDiv{
-        box-sizing: border-box;
-        width: 100%;
-        height: auto;
-    }
-    .pathway-container .searchDiv .input>input{
-        width: 100%;
-        display: block;
-    }
-    .pathway-container .searchDiv .input>button{
-        display: block;
-        margin: 10px auto;
-    }
-}
 
 .pathway-container .searchHistory {
     position: absolute;
@@ -2398,11 +2383,116 @@ table th[class*="col-"] {
 .pathway-container .result>p {
     padding-left: 0;
 }
+/* media query */
+@media(max-width: 786px){
+    .pathway-container .searchDiv{
+        box-sizing: border-box;
+        width: 100%;
+        height: auto;
+    }
+    .pathway-container .searchDiv .input>input{
+        width: 100%;
+        display: block;
+    }
+    .pathway-container .searchDiv .input>button{
+        display: block;
+        margin: 10px auto;
+    }
+    .contactus-container .submit-form {
+        margin: 0 20px 60px 20px;
+    }
+    .what-we-do .do-box{
+        text-align: center;
+    }
+    .do-box p{
+        max-width: none;
+    }
+    .do-box i.lnr{
+        margin-left: -27.5px;
+    }
+    .pathway-container .searchDiv{
+        position: relative;
+    }
+    .pathway-container .search-suggest{
+        border: none;
+        padding: 15px;
+        width: 100%;
+        right: 0;
+        border: 1px solid #d7d7d7;
+        top: 40px;
+        border-top: 0;
+    }
+    .pathway-container .search-suggest>ul>li{
+        padding: 0;
+    }
+}
+/* loading */
+.loading>p{
+    text-align: center;
+    margin-bottom: 30px;
+}
+.spinner {
+    margin: 100px auto 10px auto;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    font-size: 10px;
+}
+ 
+.spinner > div {
+  background-color: #3385ff;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+  animation: stretchdelay 1.2s infinite ease-in-out;
+}
+ 
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+ 
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+ 
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+ 
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+ 
+@-webkit-keyframes stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) } 
+  20% { -webkit-transform: scaleY(1.0) }
+}
+ 
+@keyframes stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
 /* other */
 @media screen and (max-width:991px) {
     .event-box p{    
         margin-left: 20px;
     }
+}
+#menu-xs{
+    height: 0px;
+    overflow: hidden;
+    margin-left: -15px;
+    margin-right: -15px;
 }
 #menu-xs > ul{
     list-style: none;
@@ -2411,4 +2501,8 @@ table th[class*="col-"] {
 #menu-xs > ul > li{
     height: 2em;
     line-height: 2em;
+}
+#menu-xs>ul>li.active{
+    color: #fff;
+    background: rgba(0,0,0,.3);
 }
