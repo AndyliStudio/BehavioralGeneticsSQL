@@ -1,4 +1,4 @@
-<div class="pathway-container">
+<div class="pathway-container container">
   <h1>查询pathway对应的所有显著的snp_info</h1>
   <div class="searchDiv">
     <div class="input"><input type="search" placeholder="输入你想要查询的pathway" name="search" ng-model="sstr" ng-change="searchPathway()" />
@@ -11,16 +11,19 @@
     </div>
   </div>
   <div id="container"></div>
-  <highchart type="column" data="arr"
-             title="Movie Audience Measurement"
-             subtitle="Source: PirateBay"
-             y-title="Quantitative (MM)"
-             y-Field="value"
-             display-name="name"
-             legend-formatter="displayFunction"
-             tooltip-formatter="tootipFunction"
-             category-field="period">
-  </highchart>
+  <div class="row">
+    <highchart class="col-md-8 col-md-offset-2 col-sm-12"
+               type="column" data="arr"
+               title="Movie Audience Measurement"
+               subtitle="Source: PirateBay"
+               y-title="Quantitative (MM)"
+               y-Field="value"
+               display-name="name"
+               legend-formatter="displayFunction"
+               tooltip-formatter="tootipFunction"
+               category-field="period">
+    </highchart>
+  </div>
   <div class="result" ng-show="thisPathway.marker">
     <p>查询得到的信息如下：</p>
     <table class="table table-bordered">

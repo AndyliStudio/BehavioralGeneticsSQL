@@ -2311,6 +2311,21 @@ table th[class*="col-"] {
     color: #fff;
     font-size: 14px;
 }
+@media(max-width: 786px){
+    .pathway-container .searchDiv{
+        box-sizing: border-box;
+        width: 100%;
+        height: auto;
+    }
+    .pathway-container .searchDiv .input>input{
+        width: 100%;
+        display: block;
+    }
+    .pathway-container .searchDiv .input>button{
+        display: block;
+        margin: 10px auto;
+    }
+}
 
 .pathway-container .searchHistory {
     position: absolute;
@@ -2382,4 +2397,18 @@ table th[class*="col-"] {
 
 .pathway-container .result>p {
     padding-left: 0;
+}
+/* other */
+@media screen and (max-width:991px) {
+    .event-box p{    
+        margin-left: 20px;
+    }
+}
+#menu-xs > ul{
+    list-style: none;
+    text-align: center;
+}
+#menu-xs > ul > li{
+    height: 2em;
+    line-height: 2em;
 }
