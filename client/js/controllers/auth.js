@@ -310,6 +310,8 @@ angular
       $scope.isShowTable = false
       $scope.isShowSuggest = false // wheather show suggest panel
       $scope.showLoading = false // wheather show loading panel
+      $scope.chartData = []
+      $scope.timer = null
       $scope.searchPathway = function () {
         if($scope.sstr){
           $scope.isShowSuggest = true
@@ -346,12 +348,14 @@ angular
         }
       };
       $scope.showPathway = function (id, genes) {
+        var self = $scope
         // close search suggest
         $scope.isShowSuggest = false
-        $scope.showLoading = true;
+        $scope.showLoading = true
+        $scope.isShowTable = false
         // 遍历所有的genes
-        genes.forEach(item => {
-          console.log(Gene_info)
+        genes.forEach((item, index) => {
+          $scope.chartData.push({sign: '', result: [], name: item, range: '', length: 0})
           Gene_info.find({
             filter: {
               where: {
@@ -368,6 +372,7 @@ angular
             .then(function (res) {
               if(res instanceof Array && res.length > 0){
                 // find all snps where pos bettwen start_pos and end_pos
+                self.chartData[index].range = '['+res[0].start+','+res[0].stop+']'
                 Snp_info.find({
                   filter: {
                     where: {
@@ -375,88 +380,85 @@ angular
                         gte: res[0].start,
                         ite: res[0].stop
                       }
+                    },
+                    fields: {
+                      id: true,
+                      pos: true
                     }
                   }
                 })
                   .$promise
                   .then(function (snpRes){
-                    console.log(snpRes)
+                    if(snpRes){
+                      self.chartData[index].sign = 'success'
+                      self.chartData[index].result = snpRes
+                      self.chartData[index].length = snpRes.length
+                    }else{
+                      self.chartData[index].sign = 'fail'
+                    }
                   })
               }else{
+                self.chartData[index].sign = 'fail'
                 console.log("can't found such gene_info where gene_id is " + item)
               }
             })
         })
+        self.timer = setInterval(function(){
+          var that = $scope
+          var isAllReady = $scope.chartData.every(item => {
+            return item.sign === 'success' || item.sign === 'fail'
+          })
+          // var str = ''
+          // $scope.chartData.forEach(item => {
+          //   str += '('+item.sign + ') '
+          // })
+          // console.log(str)
+          if(isAllReady){
+            that.isShowSuggest = false
+            that.showLoading = false
+            that.isShowTable = true
+            clearInterval(that.timer)
+          }
+        }, 100)
       };
-      var data = function() {
-        return [{
-            name: 'Netflix',
-            period: 'JAN',
-            value: 48
-        }, {
-            name: 'Popcorn Time',
-            period: 'JAN',
-            value: 20
-        }, {
-            name: 'HBO',
-            period: 'JAN',
-            value: 80
-        }, {
-            name: 'Telecine',
-            period: 'JAN',
-            value: 78
-        }, {
-            name: 'Netflix',
-            period: 'FEV',
-            value: 38
-        }, {
-            name: 'Popcorn Time',
-            period: 'FEV',
-            value: 48
-        }, {
-            name: 'HBO',
-            period: 'FEV',
-            value: 50
-        }, {
-            name: 'Telecine',
-            period: 'FEV',
-            value: 48
-        }, {
-            name: 'Netflix',
-            period: 'MAR',
-            value: 57
-        }, {
-            name: 'Popcorn Time',
-            period: 'MAR',
-            value: 69
-        }, {
-            name: 'HBO',
-            period: 'MAR',
-            value: 50
-        }, {
-            name: 'Telecine',
-            period: 'MAR',
-            value: 48
-        }, {
-            name: 'Netflix',
-            period: 'ABR',
-            value: 78
-        }, {
-            name: 'Popcorn Time',
-            period: 'ABR',
-            value: 76
-        }, {
-            name: 'HBO',
-            period: 'ABR',
-            value: 58
-        }, {
-            name: 'Telecine',
-            period: 'ABR',
-            value: 48
-        }];
-      };
-      $scope.arr = new data();
-
+      // $scope.isShowTable = true
+      // $scope.chartData = [
+      //   {
+      //     sign: 'success',
+      //     result: ['a', 'b', 'c', 'b'],
+      //     name: 'caonima',
+      //     range: '[1, 2]',
+      //     length: 4
+      //   },
+      //   {
+      //     sign: 'success',
+      //     result: ['a', 'b', 'c', 'b', 'b', 'c', 'b', 'c', 'b', 'c', 'b', 'c', 'b', 'c'],
+      //     name: 'caonima',
+      //     range: '[20, 21]',
+      //     length: 8
+      //   },
+      //   {
+      //     sign: 'success',
+      //     result: ['a', 'b', 'c', 'b', 'b', 'c', 'b', 'c', 'b', 'c', 'b', 'c'],
+      //     name: 'caonima',
+      //     range: '[11, 23]',
+      //     length: 12
+      //   },
+      //   {
+      //     sign: 'success',
+      //     result: ['a', 'b', 'c', 'b', 'b', 'c', 'b', 'c', 'b', 'c'],
+      //     name: 'caonima',
+      //     range: '[10, 21]',
+      //     length: 24
+      //   },
+      //   {
+      //     sign: 'success',
+      //     result: ['a', 'b', 'c', 'b', 'b', 'c'],
+      //     name: 'caonima',
+      //     range: '[4, 5]',
+      //     length: 32
+      //   }
+      // ]
       var count = 0;
       $scope.displayFunction = function () {
           count++;

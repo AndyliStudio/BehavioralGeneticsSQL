@@ -22,16 +22,16 @@
       </div>
       <p>analysis data...</p>
     </div>
-    <highchart class="col-md-8 col-md-offset-2 col-sm-12"
-               type="column" data="arr"
-               title="Movie Audience Measurement"
-               subtitle="Source: PirateBay"
-               y-title="Quantitative (MM)"
-               y-Field="value"
+    <highchart ng-if="isShowTable" class="col-md-8 col-md-offset-2 col-sm-12"
+               type="column" data="chartData"
+               title="Snp_info Range Chart"
+               subtitle=""
+               y-title="Number"
+               y-Field="length"
                display-name="name"
                legend-formatter="displayFunction"
                tooltip-formatter="tootipFunction"
-               category-field="period">
+               category-field="range">
     </highchart>
   </div>
   <div class="result" ng-show="thisPathway.marker">
