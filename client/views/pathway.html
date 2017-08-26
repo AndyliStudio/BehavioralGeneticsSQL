@@ -6,7 +6,7 @@
     </div>
     <div class="search-suggest" ng-show="suggests.length > 0 && isShowSuggest">
       <ul>
-        <li ng-repeat="item in suggests" data-id="item.id" ng-click="showPathway(item.id, item.genes)">{{item.text}}</li>
+        <li ng-repeat="item in suggests" data-id="item.id" ng-click="showPathway(item.text, item.id, item.genes)">{{item.text}}</li>
       </ul>
     </div>
   </div>
@@ -31,7 +31,8 @@
                display-name="name"
                legend-formatter="displayFunction"
                tooltip-formatter="tootipFunction"
-               category-field="range">
+               category-field="name"
+               ext-attribute="range">
     </highchart>
   </div>
   <div class="result" ng-show="thisPathway.marker">

@@ -2430,10 +2430,11 @@ table th[class*="col-"] {
 .loading>p{
     text-align: center;
     margin-bottom: 30px;
+    font-size: 16px;
 }
 .spinner {
     margin: 100px auto 10px auto;
-    width: 60px;
+    width: 70px;
     height: 60px;
     text-align: center;
     font-size: 10px;

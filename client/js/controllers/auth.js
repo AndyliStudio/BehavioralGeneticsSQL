@@ -347,8 +347,10 @@ angular
           $scope.isShowSuggest = false
         }
       };
-      $scope.showPathway = function (id, genes) {
+      $scope.showPathway = function (text, id, genes) {
         var self = $scope
+        $scope.sstr = text
+        $scope.chartData = []
         // close search suggest
         $scope.isShowSuggest = false
         $scope.showLoading = true
@@ -408,57 +410,20 @@ angular
           var isAllReady = $scope.chartData.every(item => {
             return item.sign === 'success' || item.sign === 'fail'
           })
-          // var str = ''
-          // $scope.chartData.forEach(item => {
-          //   str += '('+item.sign + ') '
-          // })
-          // console.log(str)
+          var str = ''
+          $scope.chartData.forEach(item => {
+            str += '('+item.sign + ') '
+          })
+          console.log(str)
           if(isAllReady){
             that.isShowSuggest = false
             that.showLoading = false
             that.isShowTable = true
+            that.$apply();//需要手动刷新 
             clearInterval(that.timer)
           }
         }, 100)
       };
-      // $scope.isShowTable = true
-      // $scope.chartData = [
-      //   {
-      //     sign: 'success',
-      //     result: ['a', 'b', 'c', 'b'],
-      //     name: 'caonima',
-      //     range: '[1, 2]',
-      //     length: 4
-      //   },
-      //   {
-      //     sign: 'success',
-      //     result: ['a', 'b', 'c', 'b', 'b', 'c', 'b', 'c', 'b', 'c', 'b', 'c', 'b', 'c'],
-      //     name: 'caonima',
-      //     range: '[20, 21]',
-      //     length: 8
-      //   },
-      //   {
-      //     sign: 'success',
-      //     result: ['a', 'b', 'c', 'b', 'b', 'c', 'b', 'c', 'b', 'c', 'b', 'c'],
-      //     name: 'caonima',
-      //     range: '[11, 23]',
-      //     length: 12
-      //   },
-      //   {
-      //     sign: 'success',
-      //     result: ['a', 'b', 'c', 'b', 'b', 'c', 'b', 'c', 'b', 'c'],
-      //     name: 'caonima',
-      //     range: '[10, 21]',
-      //     length: 24
-      //   },
-      //   {
-      //     sign: 'success',
-      //     result: ['a', 'b', 'c', 'b', 'b', 'c'],
-      //     name: 'caonima',
-      //     range: '[4, 5]',
-      //     length: 32
-      //   }
-      // ]
       var count = 0;
       $scope.displayFunction = function () {
           count++;
@@ -467,7 +432,7 @@ angular
 
       $scope.tootipFunction = function () {
           var color = "style=\"color: "+this.series.color+"\"";
-          return  "<span "+color+">"+ this.x +"</span><br>"+"<span "+color+">"+this.series.name+": </span> <b>"+this.point.y+"</b>"
+          return  "<span "+color+">基因名字："+ this.x +"</span><br>"+"<span "+color+">"+"包含的显著snp个数："+": </span> <b>"+this.point.y+"</b><br><span>显著snp位置区间：<b>"+this.point.range+"</b></span>"
       };
     }
   ]);
