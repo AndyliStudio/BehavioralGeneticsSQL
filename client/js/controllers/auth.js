@@ -435,4 +435,138 @@ angular
           return  "<span "+color+">基因名字："+ this.x +"</span><br>"+"<span "+color+">"+"包含的显著snp个数："+": </span> <b>"+this.point.y+"</b><br><span>显著snp位置区间：<b>"+this.point.range+"</b></span>"
       };
     }
+  ])
+  .controller('Gene_regionController', ['$scope', 'Snp_info', 'Gene_info', 'Pathway', '$state',
+    function ($scope, Snp_info, Gene_info, Pathway, $state) {
+      $scope.sstr = ''
+      $scope.suggests = []
+      $scope.thisPathway = {}
+      $scope.isShowTable = false
+      $scope.isShowSuggest = false // wheather show suggest panel
+      $scope.showLoading = false // wheather show loading panel
+      $scope.chartData = []
+      $scope.timer = null
+      $scope.searchGeneRegion = function () {
+        if($scope.sstr){
+          $scope.isShowSuggest = true
+          Gene_info.find({
+            filter: {
+              where: {
+                gene_id: {
+                  like: "%" + $scope.sstr + "%"
+                }
+              },
+              fields: {
+                start: true,
+                stop: true,
+                id: true
+              }
+            }
+          })
+            .$promise
+            .then(function (res) {
+              if (res instanceof Array) {
+                res.forEach(item => {
+                  if ($scope.suggests.length < 10) {
+                    $scope.suggests.push({
+                      id: item.id,
+                      start: item.start,
+                      stop: item.stop
+                    })
+                  }
+                })
+              }
+            })
+        }else{
+          $scope.isShowSuggest = false
+        }
+      };
+      $scope.showGeneRegion = function (text, id, genes) {
+        var self = $scope
+        $scope.sstr = text
+        $scope.chartData = []
+        // close search suggest
+        $scope.isShowSuggest = false
+        $scope.showLoading = true
+        $scope.isShowTable = false
+        // 遍历所有的genes
+        genes.forEach((item, index) => {
+          $scope.chartData.push({sign: '', result: [], name: item, range: '', length: 0})
+          Gene_info.find({
+            filter: {
+              where: {
+                gene_id: item
+              },
+              fields: {
+                start: true,
+                stop: true
+              },
+              limit: 1
+            }
+          })
+            .$promise
+            .then(function (res) {
+              if(res instanceof Array && res.length > 0){
+                // find all snps where pos bettwen start_pos and end_pos
+                self.chartData[index].range = '['+res[0].start+','+res[0].stop+']'
+                Snp_info.find({
+                  filter: {
+                    where: {
+                      pos: {
+                        gte: res[0].start,
+                        ite: res[0].stop
+                      }
+                    },
+                    fields: {
+                      id: true,
+                      pos: true
+                    }
+                  }
+                })
+                  .$promise
+                  .then(function (snpRes){
+                    if(snpRes){
+                      self.chartData[index].sign = 'success'
+                      self.chartData[index].result = snpRes
+                      self.chartData[index].length = snpRes.length
+                    }else{
+                      self.chartData[index].sign = 'fail'
+                    }
+                  })
+              }else{
+                self.chartData[index].sign = 'fail'
+                console.log("can't found such gene_info where gene_id is " + item)
+              }
+            })
+        })
+        self.timer = setInterval(function(){
+          var that = $scope
+          var isAllReady = $scope.chartData.every(item => {
+            return item.sign === 'success' || item.sign === 'fail'
+          })
+          var str = ''
+          $scope.chartData.forEach(item => {
+            str += '('+item.sign + ') '
+          })
+          console.log(str)
+          if(isAllReady){
+            that.isShowSuggest = false
+            that.showLoading = false
+            that.isShowTable = true
+            that.$apply();//需要手动刷新 
+            clearInterval(that.timer)
+          }
+        }, 100)
+      };
+      var count = 0;
+      $scope.displayFunction = function () {
+          count++;
+          return count+ ' ' +this.name;
+      };
+
+      $scope.tootipFunction = function () {
+          var color = "style=\"color: "+this.series.color+"\"";
+          return  "<span "+color+">基因名字："+ this.x +"</span><br>"+"<span "+color+">"+"包含的显著snp个数："+": </span> <b>"+this.point.y+"</b><br><span>显著snp位置区间：<b>"+this.point.range+"</b></span>"
+      };
+    }
   ]);

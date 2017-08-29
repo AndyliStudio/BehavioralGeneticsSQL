@@ -2383,6 +2383,117 @@ table th[class*="col-"] {
 .pathway-container .result>p {
     padding-left: 0;
 }
+
+/* geneRegion style */
+
+.geneRegion-container {
+    padding-top: 2em;
+}
+
+.geneRegion-container>h1 {
+    font-size: 20px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.geneRegion-container .searchDiv {
+    width: 34em;
+    margin: 2em auto 0 auto;
+    height: 2.8em;
+    white-space: nowrap;
+}
+
+.geneRegion-container .searchDiv .input>input {
+    height: 2.8em;
+    width: 28em;
+    background-color: white;
+    padding: 0 1em;
+    box-sizing: border-box;
+    border: 1px solid #d7d7d7;
+    margin-bottom: 0px;
+}
+
+.geneRegion-container .searchDiv .input>button {
+    padding: 0px;
+    border: 0px;
+    height: 2.8em;
+    width: 100px;
+    background-color: #3385FF;
+    color: #fff;
+    font-size: 14px;
+}
+
+.geneRegion-container .searchHistory {
+    position: absolute;
+    width: 900px;
+    height: 120px;
+    left: 50%;
+    top: 35%;
+    margin-left: -450px;
+    margin-top: -60px;
+}
+
+.geneRegion-container .searchHistory a {
+    text-decoration: solid;
+    margin-right: 20px;
+}
+
+.geneRegion-container .searchHistory div {
+    background-color: #dBdAd9;
+    height: 100px;
+    padding: 20px;
+}
+
+.geneRegion-container .friendLink {
+    position: absolute;
+    width: 900px;
+    height: 120px;
+    left: 50%;
+    top: 62%;
+    margin-left: -450px;
+    margin-top: -60px;
+}
+
+.geneRegion-container .friendLinkChild {
+    background-color: #dBdAd9;
+}
+
+.geneRegion-container .friendLinkChild div {
+    float: left;
+    margin-right: 20px;
+    width: 100px;
+    height: 100px;
+    background-color: #3f86b7;
+}
+
+.geneRegion-container .search-suggest {
+    border: 1px solid #d7d7d7;
+    border-top: 0;
+    width: 28em;
+    background: #fff;
+    z-index: 1000;
+    position: absolute;
+}
+
+.geneRegion-container .search-suggest>ul>li {
+    list-style: none;
+    height: 2em;
+    line-height: 2em;
+    padding: 0 1em;
+}
+
+.geneRegion-container .search-suggest>ul>li:hover {
+    background: #d7d7d7;
+}
+
+.geneRegion-container .result {
+    margin: 1em auto 0 auto;
+    width: 48em;
+}
+
+.geneRegion-container .result>p {
+    padding-left: 0;
+}
 /* media query */
 @media(max-width: 786px){
     .pathway-container .searchDiv{
@@ -2423,6 +2534,35 @@ table th[class*="col-"] {
         border-top: 0;
     }
     .pathway-container .search-suggest>ul>li{
+        padding: 0;
+    }
+    /* geneRegion h5 style */
+    .geneRegion-container .searchDiv{
+        box-sizing: border-box;
+        width: 100%;
+        height: auto;
+    }
+    .geneRegion-container .searchDiv .input>input{
+        width: 100%;
+        display: block;
+    }
+    .geneRegion-container .searchDiv .input>button{
+        display: block;
+        margin: 10px auto;
+    }
+    .geneRegion-container .searchDiv{
+        position: relative;
+    }
+    .geneRegion-container .search-suggest{
+        border: none;
+        padding: 15px;
+        width: 100%;
+        right: 0;
+        border: 1px solid #d7d7d7;
+        top: 40px;
+        border-top: 0;
+    }
+    .geneRegion-container .search-suggest>ul>li{
         padding: 0;
     }
 }

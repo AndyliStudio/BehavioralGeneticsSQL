@@ -30,6 +30,18 @@ node .
 ```
 然后在浏览器打开 [http://localhost:9000/](http://localhost:9000/)
 
+## 部署项目所需
+服务器硬件条件： 可外网访问、域名、可ssh登录、本地mysql
+
+服务器用到的工具: 
+1. mysql 放本地就好，这样查询比较快
+2. nginx node服务是在9000端口启动的，需要nginx代理到80端口供外网访问
+3. sftp 上传博客所需，项目集成了一套博客发布工具，可以在本地通过sftp或者ftp修改博客内容
+4. nodejs执行环境，这个比较好装，只需要外网能访问，通过npm就可以快速下载项目所需的依赖包
+5. ssh 最好能提供shh登录，方便对部署的代码做改动
+6. git 用来下载和同步项目源码
+
+
 ## 其他问题
 ### 1. 如何设置loopback接口支持跨域
 参考教程  http://loopback.io/doc/en/lb2/Security-considerations.html#deprecation-of-built-in-cors-middleware

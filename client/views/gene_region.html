@@ -1,22 +1,38 @@
-<div class="geneRegion-container">
-    <div class="searchDiv">
-        <input type="search" placeholder="输入你想要查询的基因或物种" name="search" size=50 ng-model="searchString"/><button>搜索</button>
-        <li ng-repeat="i in items | searchFor:searchString">
-				<p>{{i}}</p>
-			</li>
-		</ul>
+<div class="geneRegion-container container">
+  <h1>查询gene_info对应的所有显著的snp_info</h1>
+  <div class="searchDiv">
+    <div class="input"><input type="search" placeholder="输入你想要查询的基因" name="search" ng-model="sstr" ng-change="searchGeneRegion()" />
+      <button ng-click="showPathway(suggests[0].text, suggests[0].id, suggests[0].text)">搜索</button>
     </div>
-    <!--{{resultData}}-->
-    <!--<div class="searchHistory">
-        <h3>搜索历史</h3>
-        <div><a href="#">ENSG00000139618</a><a href="#">YBL058W</a></div>
+    <div class="search-suggest" ng-show="suggests.length > 0 && isShowSuggest">
+      <ul>
+        <li ng-repeat="item in suggests" data-id="item.id" ng-click="showPathway(item.text, item.id, item.genes)">{{item.text}}</li>
+      </ul>
     </div>
-    <div id="friendLink">
-        <h3>友情链接</h3>
-        <div class="friendLinkChild">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>-->
+  </div>
+  <div id="container"></div>
+  <div class="row">
+    <div class="loading" ng-show="showLoading">
+      <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+      </div>
+      <p>analysis data...</p>
+    </div>
+    <highchart ng-if="isShowTable" class="col-md-8 col-md-offset-2 col-sm-12"
+               type="column" data="chartData"
+               title="Snp_info Range Chart"
+               subtitle=""
+               y-title="Number"
+               y-Field="length"
+               display-name="name"
+               legend-formatter="displayFunction"
+               tooltip-formatter="tootipFunction"
+               category-field="name"
+               ext-attribute="range">
+    </highchart>
+  </div>
 </div>
