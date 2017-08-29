@@ -2,15 +2,14 @@
   <h1>查询gene_info对应的所有显著的snp_info</h1>
   <div class="searchDiv">
     <div class="input"><input type="search" placeholder="输入你想要查询的基因" name="search" ng-model="sstr" ng-change="searchGeneRegion()" />
-      <button ng-click="showPathway(suggests[0].text, suggests[0].id, suggests[0].text)">搜索</button>
+      <button ng-click="showGeneRegion(suggests[0].gene_id, suggests[0].start, suggests[0].stop)">搜索</button>
     </div>
     <div class="search-suggest" ng-show="suggests.length > 0 && isShowSuggest">
       <ul>
-        <li ng-repeat="item in suggests" data-id="item.id" ng-click="showPathway(item.text, item.id, item.genes)">{{item.text}}</li>
+        <li ng-repeat="item in suggests" data-id="item.id" ng-click="showGeneRegion(item.gene_id, item.start, item.stop)">{{item.gene_id}}</li>
       </ul>
     </div>
   </div>
-  <div id="container"></div>
   <div class="row">
     <div class="loading" ng-show="showLoading">
       <div class="spinner">
@@ -22,17 +21,40 @@
       </div>
       <p>analysis data...</p>
     </div>
-    <highchart ng-if="isShowTable" class="col-md-8 col-md-offset-2 col-sm-12"
-               type="column" data="chartData"
-               title="Snp_info Range Chart"
-               subtitle=""
-               y-title="Number"
-               y-Field="length"
-               display-name="name"
-               legend-formatter="displayFunction"
-               tooltip-formatter="tootipFunction"
-               category-field="name"
-               ext-attribute="range">
-    </highchart>
+  </div>
+  <div class="result" ng-show="isShowTable">
+    <div class="hasData" ng-show="allSnps.length > 0">
+        <p>查询得到的信息如下：</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="line-height"><input type="checkbox" ng-model="isSelectAll" ng-change="selectAll()" /></th>
+                    <th>trait</th>
+                    <th>marker</th>
+                    <th>p</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(index, item) in showingSnps track by $index">
+                    <td class="line-height"><input type="checkbox" ng-model="item.isChecked" ng-selected="item.isChecked || isSelectAll" ng-change="itemSelected(item.isChecked, item.id)"
+                        /></td>
+                    <td>{{ item.trait }}</td>
+                    <td>{{ item.marker }}</td>
+                    <td>{{ item.p }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-right">
+            <ul uib-pagination total-items="totalItems" first-text="首页" last-text="最后一页" previous-text="上一页" next-text="下一页" ng-model="currentPage"
+                max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" ng-change="pageChanged()"></ul>
+        </div>
+        <p class="download" ng-click="download()"><img src="../images/download.png" alt="">下载选中数据</p>
+        <p class="param-des">
+            参数注释如下：&nbsp;marker: 基因标识，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述，这是一段很长很长的描述
+        </p>
+    </div>
+    <div class="noData" ng-show="allSnps.length == 0">
+        there has found none of data...
+    </div>
   </div>
 </div>

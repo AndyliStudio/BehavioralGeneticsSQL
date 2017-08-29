@@ -1238,10 +1238,10 @@ textarea {
 /* gene_region页面样式 */
 
 .geneRegion-container .searchDiv {
-    position: absolute;
+    position: relative;
     width: auto;
     height: 40px;
-    top: 20%;
+    top: 37px;
     left: 50%;
     transform: translate(-50%);
     white-space: nowrap;
@@ -2398,7 +2398,7 @@ table th[class*="col-"] {
 
 .geneRegion-container .searchDiv {
     width: 34em;
-    margin: 2em auto 0 auto;
+    margin-bottom: 6em;
     height: 2.8em;
     white-space: nowrap;
 }
@@ -2493,6 +2493,23 @@ table th[class*="col-"] {
 
 .geneRegion-container .result>p {
     padding-left: 0;
+}
+
+.geneRegion-container .text-right {
+    text-align: right;
+}
+
+.geneRegion-container .line-height {
+    vertical-align: center;
+}
+
+.geneRegion-container .download {
+    text-decoration: underline;
+    color: #337ab7;
+}
+
+.geneRegion-container .download>img {
+    height: 20px;
 }
 /* media query */
 @media(max-width: 786px){
