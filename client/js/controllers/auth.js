@@ -476,9 +476,6 @@ angular
                 stop: true,
                 gene_id: true,
                 id: true
-              },
-              sort: {
-                gene_id: -1
               }
             }
           })
@@ -516,14 +513,15 @@ angular
           filter: {
             where: {
               pos: {  
-                between: [parseInt(start), parseInt(stop)]
+                // between: [parseInt(start), parseInt(stop)]
+                between: [75804327, 85857943]
               }
             },
             fields: {
               id: true,
               trait: true,
               marker: true,
-              p: true
+              pos: true
             }
           }
         })

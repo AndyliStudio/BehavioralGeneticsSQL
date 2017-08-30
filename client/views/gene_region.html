@@ -31,7 +31,7 @@
                     <th class="line-height"><input type="checkbox" ng-model="isSelectAll" ng-change="selectAll()" /></th>
                     <th>trait</th>
                     <th>marker</th>
-                    <th>p</th>
+                    <th>pos</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,13 +40,13 @@
                         /></td>
                     <td>{{ item.trait }}</td>
                     <td>{{ item.marker }}</td>
-                    <td>{{ item.p }}</td>
+                    <td>{{ item.pos }}</td>
                 </tr>
             </tbody>
         </table>
         <div class="text-right">
             <ul uib-pagination total-items="totalItems" first-text="首页" last-text="最后一页" previous-text="上一页" next-text="下一页" ng-model="currentPage"
-                max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" ng-change="pageChanged()"></ul>
+                max-size="9" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="pageChanged()"></ul>
         </div>
         <p class="download" ng-click="download()"><img src="../images/download.png" alt="">下载选中数据</p>
         <p class="param-des">
