@@ -35,7 +35,7 @@
                   <li><a class="scroll" ui-sref="main" ui-sref-active="active">服务</a></li>
                   <!-- <li><a class="scroll" ui-sref="help" ui-sref-active="active">使用帮助</a></li> -->
                   <li><a class="scroll" ui-sref="team" ui-sref-active="active">团队</a></li>
-                  <li><a class="scroll" ui-sref="blog" ui-sref-active="active">官方博客</a></li>
+                  <li><a class="scroll" href="http://geneblog.andylistudio.com" target="_blank">官方博客</a></li>
                   <li><a class="scroll" ui-sref="contact-us" ui-sref-active="active">联系我们</a></li>
                   <li>
                     <button type="button" class="btn btn-default navbar-btn" ui-sref="login" ng-hide="isLogined">登陆</button>
@@ -59,7 +59,7 @@
                 <ul>
                   <li ui-sref="main" ui-sref-active="active">服务</li>
                   <li ui-sref="team" ui-sref-active="active">团队</li>
-                  <li>官方博客</li>
+                  <li><a href="http://geneblog.andylistudio.com" target="_blank">官方博客</a></li>
                   <li ui-sref="contact-us" ui-sref-active="active">联系我们</li>
                   <li ui-sref="login" ui-sref-active="active">登陆</li>
                   <li ui-sref="sign-up" ui-sref-active="active">注册</li>
@@ -113,6 +113,24 @@
         $('#menu-xs').animate({height: 0})
       }
     })
+    // start to use
+    var target = null
+    if(document.documentElement.scrollTop){
+      target = $('html')
+    }else{
+      target = $('body')
+    }
+   function gotoService(){
+      (function () {
+        var timer = setInterval(function(){
+          var top = target.scrollTop();
+          if(top >= (Math.min(($('#service').offset().top - 40), (target.height() - $(window).height())))){
+            clearInterval(timer)
+          }
+          target.scrollTop(top += 20)
+        }, 10)
+      })()
+    }
     /**
      * 获取滚动条距离顶端的距离
      * @return {}支持IE6

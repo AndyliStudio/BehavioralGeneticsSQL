@@ -2664,3 +2664,10 @@ table th[class*="col-"] {
     color: #fff;
     background: rgba(0,0,0,.3);
 }
+#menu-xs > ul > li>a{
+    text-align: none;
+    color: #333;
+}
+#menu-xs > ul > li>a:hover, #menu-xs > ul > li>a:active{
+    color: #fff;
+}
