@@ -513,8 +513,8 @@ angular
           filter: {
             where: {
               pos: {  
-                // between: [parseInt(start), parseInt(stop)]
-                between: [75804327, 85857943]
+                between: [parseInt(start), parseInt(stop)]
+                // between: [75804327, 85857943]
               }
             },
             fields: {
@@ -584,8 +584,13 @@ angular
           }
         }).then(function successCallback(response) {
           if (response.data.result.errno === 0) {
-            alert(response.data.result.download_url)
-            window.open(response.data.result.download_url)
+            $('body').append('<a href="response.data.result.download_url" id="gotoDownload"></a>')
+            $('#gotoDownload').click(function(event){
+              event.preventDefault()
+              window.open(response.data.result.download_url)
+            })
+            $('#gotoDownload').trigger('click')
+            // window.open(response.data.result.download_url)
           } else {
             $scope.download_fail_text = '下载失败，' + response.data.result.message
           }

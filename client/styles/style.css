@@ -2511,6 +2511,10 @@ table th[class*="col-"] {
 .geneRegion-container .download>img {
     height: 20px;
 }
+
+.geneRegion-container .noData{
+    text-align: center;
+}
 /* media query */
 @media(max-width: 786px){
     .pathway-container .searchDiv{
