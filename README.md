@@ -63,16 +63,3 @@ node server/tools/readAndSave.js
 }
 ```
 这可以将用户模型基本的权限控制清除，然后自己再通过`lb acl`定义user模型的权限控制规则，详情请参见[strongloop issues](https://github.com/strongloop/loopback/issues/559)
-
-# 基因查询的算法
-snpinfo====>
-trait --- input search 
-user input  if p < user input print
-
-gene_info --- Locus --- snpinfo.pos in (start, stop) && user input < p ===> print
-              [start, stop] --- snpinfo.pos in (start, stop) && user input < p ===> print
-
-snp-info
-marker --- 显示marker相关信息
-
-pathway_name --- genes --- gene -- 基因名字－－gene_info.locus && user input < p ===> print -- print
